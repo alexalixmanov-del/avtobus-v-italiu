@@ -1,0 +1,54 @@
+.hero-summary { font-size:clamp(14px,1.5vw,18px); font-weight:700; color:#F2B01E; line-height:1.6; margin:0 0 18px; max-width:65ch; }
+.faq-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(280px,1fr); gap:32px; align-items:start; }
+.faq-help { padding:28px; border:1px solid rgba(242,176,30,.3); background:linear-gradient(145deg,#102C4E,#0A1D35); border-radius:20px; }
+.faq-help h3 { font-family:'Unbounded',sans-serif; font-size:20px; font-weight:500; line-height:1.45; margin:0 0 14px; }
+.faq-help p { font-size:15px; color:#B9CBE1; line-height:1.6; margin:0 0 20px; }
+.faq-plus { width:28px; height:28px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.08); border-radius:50%; transition:transform .18s; color:#F2B01E; font-size:20px; }
+.faq-item[open] .faq-plus { transform:rotate(45deg); }
+.help-phone { display:block; font-size:21px; font-weight:700; margin-bottom:20px; }
+.help-links { display:flex; gap:10px; flex-wrap:wrap; }
+.help-links a { padding:12px 16px; border:1px solid rgba(255,255,255,.2); border-radius:10px; color:#F5F8FC; font-weight:700; }
+.help-links a:first-child { color:#4BE58C; background:rgba(37,211,102,.12); }
+.cabin-windows { display:flex; justify-content:space-between; color:#A9C0DA; font-size:13px; padding:0 4px 8px; }
+.cabin-rear { text-align:center; color:#A9C0DA; font-size:13px; margin-top:12px; }
+[data-v="seat"][data-status="taken"], [data-v="seat"][data-status="blocked"], [data-v="seat"][data-status="locked"] { text-decoration:line-through; }
+[data-v="seat"][aria-pressed="true"] { text-decoration:none; }
+[hidden] { display:none !important; }
+.date-strip { scrollbar-width:thin; scrollbar-color:#F2B01E #102C4E; }
+.date-strip:focus-visible { outline:2px solid #F2B01E; outline-offset:4px; }
+.no-js { padding:20px; font-size:16px; }
+.skip-link { position:fixed; left:16px; top:-100px; z-index:200; padding:12px 16px; background:#F2B01E; color:#061225; border-radius:8px; }
+.skip-link:focus { top:12px; }
+[data-v="mbar"][data-active="false"] { display:none !important; }
+header a[hreflang] { display:inline-flex; align-items:center; justify-content:center; }
+[data-v="seat"]:disabled { text-decoration:line-through; }
+[data-v="seat"][data-status="locked"] { opacity:.65; }
+label > span, .faq-help p { overflow-wrap:break-word; }
+.field-error { font-size:13px; color:#F0A6A6; line-height:1.5; }
+.seat-options { display:grid; gap:8px; margin-top:16px; }
+.seat-options button { padding:14px; min-height:48px; text-align:left; font-size:15px; font-weight:700; line-height:1.4; color:#DCE8F6; border:1px solid #617894; background:transparent; border-radius:12px; cursor:pointer; }
+.seat-options button[aria-pressed="true"] { color:#061225; background:#F2B01E; border-color:#F2B01E; }
+.route-addresses { font-size:14px; line-height:1.55; margin:16px 0; }
+.route-addresses dt { font-weight:700; }
+.route-addresses dd { margin:2px 0 12px; }
+.send-fallback { margin:16px 0 0; padding:16px; background:#F5F8FC; border:1px solid #B54B3F; border-radius:12px; color:#061225; }
+.send-fallback p { margin:0 0 12px; line-height:1.6; }
+.send-fallback a { display:flex; align-items:center; justify-content:center; min-height:48px; padding:12px; margin-top:8px; color:#061225; border:1px solid #617894; border-radius:10px; font-weight:700; }
+.send-fallback .fallback-wa { background:#25D366; border-color:#25D366; }
+.copy-viber { width:100%; min-height:44px; margin-top:12px; padding:12px; border:1px solid #7360F2; color:#5A48D8; background:transparent; border-radius:10px; font-size:14px; cursor:pointer; }
+a:focus-visible { outline:2px solid #F2B01E; outline-offset:4px; border-radius:4px; }
+p a, li a { text-decoration:underline; text-underline-offset:3px; }
+.date-note { font-size:13px; line-height:1.5; color:#A9C0DA; margin-top:6px; }
+[data-v="paxgrid"] { grid-template-columns:1fr !important; }
+@media(min-width:760px) { [data-v="paxgrid"] { grid-template-columns:1fr 1fr !important; } }
+@media(max-width:940px) { .faq-layout { grid-template-columns:1fr; gap:20px; } .hero-summary { margin-bottom:16px; } }
+@media(max-width:580px) {
+  .faq-help { padding:22px; }
+  [data-v="hero"] > img { height:300px !important; object-position:78% center !important; }
+  [data-v="direction"] { white-space:normal !important; line-height:1.4; padding:12px 8px !important; min-height:50px; font-size:13px !important; }
+  [data-v="direction"] > span { display:none !important; }
+  [data-v="cta"] { padding:18px 56px 18px 18px !important; }
+  header a[hreflang] { min-width:32px !important; padding:6px 4px !important; }
+  [data-v="seat-card"] { padding:12px !important; }
+  [data-v="hero-image"] + div { background:linear-gradient(180deg,rgba(6,18,37,.82),rgba(6,18,37,.35) 170px,#061225 300px) !important; }
+}

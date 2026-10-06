@@ -1,0 +1,616 @@
+
+
+<div translate="no" class="notranslate" style="background:#061225">
+
+  <a class="skip-link" href="#main-content">{{ t.ui.skip }}</a>
+  <div style="position:relative">
+    <header data-v="head" style="position:absolute;top:0;left:0;right:0;z-index:60">
+      <div data-v="headin" style="max-width:1320px;margin:0 auto;padding:clamp(16px,2.2vw,26px) clamp(16px,4vw,34px);display:flex;align-items:center;gap:clamp(14px,3vw,40px)">
+        <a href="#v3top" style="display:flex;align-items:center;gap:11px;flex-shrink:0">
+          <img data-v="logo" src="/brand-sm.webp" width="190" height="107" alt="Avtobus v Italiu" style="height:clamp(44px,4.4vw,58px);width:auto;display:block" />
+        </a>
+        <nav data-v="nav" style="display:flex;gap:clamp(20px,2.6vw,38px);margin:0 auto;font-size:15px;font-weight:500;color:#DCE7F4">
+          <a href="#v3results" style="color:#DCE7F4">{{ t.nav.search }}</a>
+          <a href="#v3stops" style="color:#DCE7F4">{{ t.nav.stops }}</a>
+          <a href="#v3seats" style="color:#DCE7F4">{{ t.nav.seats }}</a>
+          <a href="#v3faq" style="color:#DCE7F4">{{ t.nav.faq }}</a>
+        </nav>
+        <div style="display:flex;align-items:center;gap:clamp(10px,1.6vw,18px);margin-left:auto">
+          <span style="display:flex;align-items:center;gap:9px">
+            <svg data-v="globe" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#DCE7F4" stroke-width="1.6" style="flex:0 0 auto"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.4 2.6 15.6 0 18M12 3c-2.6 2.4-2.6 15.6 0 18"></path></svg>
+            <span style="display:flex;gap:2px">
+              <a href="/" hreflang="uk" aria-label="Українська" style="{{ langUa }}">UA</a>
+              <a href="/ru/" hreflang="ru" aria-label="Русский" style="{{ langRu }}">RU</a>
+              <a href="/it/" hreflang="it" aria-label="Italiano" style="{{ langIt }}">IT</a>
+            </span>
+          </span>
+          <span data-v="mcall" style="display:none;gap:8px">
+            <a href="{{ callHref }}" aria-label="{{ t.bar.call }}" style="width:44px;height:44px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#F2B01E;color:#08182F">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+            </a>
+            <a href="{{ waHref }}" aria-label="WhatsApp" style="width:44px;height:44px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#25D366;color:#062B14">
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path></svg>
+            </a>
+          </span>
+          <span data-v="nav" style="width:1px;height:24px;background:rgba(255,255,255,0.22)"></span>
+          <span data-v="nav" style="display:flex;flex-direction:column;gap:2px;line-height:1.25">
+            <a href="tel:+380674704617" style="display:flex;align-items:center;gap:7px;font-size:14.5px;font-weight:600;color:#FFFFFF;white-space:nowrap">
+              <span style="width:18px;height:12px;flex:0 0 auto;border-radius:2px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(255,255,255,0.16)">
+                <span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span>
+              </span>
+              +380 67 470 46 17
+            </a>
+            <a href="tel:+393245958718" style="display:flex;align-items:center;gap:7px;font-size:14.5px;font-weight:600;color:#FFFFFF;white-space:nowrap">
+              <span style="width:18px;height:12px;flex:0 0 auto;border-radius:2px;overflow:hidden;display:flex;box-shadow:0 0 0 1px rgba(255,255,255,0.16)">
+                <span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span>
+              </span>
+              +39 324 595 8718
+            </a>
+          </span>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="main-content" tabindex="-1">
+    <section id="v3top" data-v="hero" style="position:relative;min-height:clamp(660px,100vh,1000px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden">
+      <img data-v="hero-image" src="/hero-1600.webp" srcset="/hero-900.webp 900w, /hero-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 42%" />
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,18,37,0.72) 0%,rgba(10,38,80,0.3) 30%,rgba(6,18,37,0.84) 76%,#061225 100%);pointer-events:none"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:5px;display:flex;pointer-events:none">
+        <span style="flex:1;background:#0E8A4F"></span><span style="flex:1;background:#F5F8FC"></span><span style="flex:1;background:#CE2B37"></span>
+      </div>
+
+      <div data-v="heroin" style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:clamp(120px,16vw,190px) clamp(16px,4vw,34px) clamp(28px,4vw,48px)">
+        <h1 data-v="h1" style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(40px,5.2vw,72px);line-height:1.06;letter-spacing:-0.042em;margin:0 0 20px;max-width:14ch;color:#FFFFFF;animation:v3rise 0.7s ease both">{{ t.hero.t1 }}<br /><span style="color:#F2B01E">{{ t.hero.t2 }}</span></h1>
+        <p class="hero-summary">{{ t.ui.summary }}</p>
+        <p data-v="herosub" style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#C6D5E8;max-width:48ch;margin:0 0 clamp(30px,4.5vw,56px);font-weight:500">{{ t.hero.sub }}</p>
+
+        <div id="v3search" data-v="glass" style="scroll-margin-top:20px;background:rgba(10,38,80,0.66);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.13);border-radius:24px;padding:clamp(18px,2.3vw,28px);box-shadow:0 36px 90px rgba(0,0,0,0.5)">
+          <div style="margin-bottom:20px">
+            <div style="{{ lbl }}">{{ t.f.dirLabel }}</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;padding:5px;background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.12);border-radius:15px;max-width:min(100%,520px)">
+              <button type="button" data-v="direction" aria-pressed="{{ dirSelectedA }}" disabled="{{ sending }}" onClick="{{ setDirA }}" style="{{ dirA }}">
+                <span style="display:inline-flex;width:22px;height:15px;border-radius:3px;overflow:hidden;flex-direction:column;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,0.18)">
+                  <span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span>
+                </span>
+                {{ t.f.dirUaIt }}
+              </button>
+              <button type="button" data-v="direction" aria-pressed="{{ dirSelectedB }}" disabled="{{ sending }}" onClick="{{ setDirB }}" style="{{ dirB }}">
+                <span style="display:inline-flex;width:22px;height:15px;border-radius:3px;overflow:hidden;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,0.18)">
+                  <span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span>
+                </span>
+                {{ t.f.dirItUa }}
+              </button>
+            </div>
+          </div>
+
+          <div data-v="searchgrid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px">
+            <label style="display:flex;flex-direction:column;gap:10px">
+              <span style="{{ lbl }}">{{ t.f.from }}</span>
+              <span style="position:relative;display:block">
+                <sc-if value="{{ isUaIt }}" hint-placeholder-val="{{ true }}">
+                  <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);width:24px;height:16px;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,0.14)">
+                    <span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span>
+                  </span>
+                </sc-if>
+                <sc-if value="{{ isItUa }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);width:24px;height:16px;border-radius:3px;overflow:hidden;display:flex;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,0.14)">
+                    <span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span>
+                  </span>
+                </sc-if>
+                <select disabled="{{ sending }}" value="{{ form.from }}" onChange="{{ onFrom }}" style="{{ fromInp }}">
+                  <sc-for list="{{ fromOptions }}" as="c" hint-placeholder-count="4">
+                    <option value="{{ c.k }}">{{ c.name }}</option>
+                  </sc-for>
+                </select>
+              </span>
+            </label>
+
+            <label style="display:flex;flex-direction:column;gap:10px">
+              <span style="{{ lbl }}">{{ t.f.to }}</span>
+              <span style="position:relative;display:block">
+                <sc-if value="{{ toFlagIt }}" hint-placeholder-val="{{ true }}">
+                  <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);width:24px;height:16px;border-radius:3px;overflow:hidden;display:flex;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,0.14)">
+                    <span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span>
+                  </span>
+                </sc-if>
+                <sc-if value="{{ toFlagUa }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);width:24px;height:16px;border-radius:3px;overflow:hidden;display:flex;flex-direction:column;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,0.14)">
+                    <span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span>
+                  </span>
+                </sc-if>
+                <select disabled="{{ sending }}" value="{{ form.to }}" onChange="{{ onTo }}" style="{{ toInp }}">
+                  <sc-for list="{{ toOptions }}" as="c" hint-placeholder-count="4">
+                    <option value="{{ c.k }}">{{ c.name }}</option>
+                  </sc-for>
+                </select>
+              </span>
+            </label>
+
+            <label style="display:flex;flex-direction:column;gap:10px">
+              <span style="{{ lbl }}">{{ t.f.dateOut }}</span>
+              <span style="position:relative;display:block">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+                <select disabled="{{ sending }}" value="{{ form.dateOut }}" onChange="{{ onDateOut }}" style="{{ dateInp }}">
+                  <sc-for list="{{ dateOutOptions }}" as="d" hint-placeholder-count="4">
+                    <option value="{{ d.k }}">{{ d.name }}</option>
+                  </sc-for>
+                </select>
+              </span>
+            </label>
+
+            <label style="display:flex;flex-direction:column;gap:10px">
+              <span style="{{ lbl }}">{{ t.f.pax }}</span>
+              <span style="position:relative;display:block">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c1.4-4 4-6 7.5-6s6.1 2 7.5 6"></path></svg>
+                <select disabled="{{ sending }}" value="{{ form.pax }}" onChange="{{ onPax }}" style="{{ inpIcon }}">
+                  <sc-for list="{{ paxOptions }}" as="p" hint-placeholder-count="4">
+                    <option value="{{ p }}">{{ p }}</option>
+                  </sc-for>
+                </select>
+              </span>
+            </label>
+          </div>
+          <p class="date-note">{{ t.ui.dateNote }}</p>
+
+          <a data-v="cta" href="#v3results" onClick="{{ doSearch }}" style="position:relative;display:flex;align-items:center;justify-content:center;margin-top:18px;padding:22px 60px;background:#F2B01E;color:#08182F;border-radius:16px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(16px,1.7vw,19px);transition:background 0.15s ease">
+            {{ t.f.search }}
+            <span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(8,24,47,0.14);display:flex;align-items:center;justify-content:center;font-size:16px">&#8594;</span>
+          </a>
+        </div>
+
+        <div data-v="trust" style="display:flex;align-items:center;gap:clamp(14px,2.4vw,26px);justify-content:center;flex-wrap:wrap;margin-top:clamp(24px,3.4vw,38px)">
+          <sc-for list="{{ trustRows }}" as="c" hint-placeholder-count="3">
+            <span style="display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;color:#C6D5E8">
+              <span style="width:20px;height:20px;flex:0 0 auto;border-radius:50%;border:1.5px solid #F2B01E;color:#F2B01E;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">&#10003;</span>
+              {{ c }}
+            </span>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+  <section id="v3results" style="background:radial-gradient(120% 90% at 12% 0%,rgba(18,69,127,0.32) 0%,rgba(6,18,37,0) 58%);scroll-margin-top:86px;max-width:1320px;margin:0 auto;padding:clamp(38px,5vw,64px) clamp(16px,4vw,32px) 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px">
+      <h2 style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.03em;margin:0">{{ resultTitle }}</h2>
+      <span style="font-size:13.5px;font-weight:600;color:#6F8AA8">{{ t.res.sub }}</span>
+    </div>
+
+    <sc-if value="{{ needsRoute }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:clamp(26px,4vw,40px);border:1px dashed rgba(255,255,255,0.18);border-radius:20px;background:rgba(255,255,255,0.02)">
+        <span style="display:inline-flex;width:44px;height:44px;flex:0 0 auto;align-items:center;justify-content:center;border-radius:50%;background:rgba(242,176,30,0.14);color:#F2B01E;font-size:22px;font-weight:800">?</span>
+        <div style="flex:1;min-width:min(100%,220px)">
+          <div style="font-family:'Unbounded',sans-serif;font-weight:500;font-size:clamp(16px,2vw,19px);line-height:1.35">{{ t.res.empty }}</div>
+          <div style="font-size:13.5px;font-weight:600;color:#8FA8C6;margin-top:6px">{{ t.res.emptySub }}</div>
+        </div>
+        <a href="#v3search" style="padding:14px 24px;background:rgba(255,255,255,0.08);color:#F5F8FC;border-radius:12px;font-size:14.5px;font-weight:700">{{ t.res.emptyCta }}</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ routeReady }}" hint-placeholder-val="{{ true }}">
+    <div class="date-strip" tabindex="0" aria-label="{{ t.f.dateOut }}" style="display:flex;gap:9px;overflow-x:auto;padding:2px 64px 16px 2px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 56px),transparent 100%)">
+      <sc-for list="{{ dateStrip }}" as="d" hint-placeholder-count="6">
+        <button disabled="{{ sending }}" onClick="{{ d.onClick }}" style="{{ d.style }}">
+          <span style="display:block;font-size:13px;font-weight:700;letter-spacing:0.09em;text-transform:none;opacity:0.85">{{ d.day }}</span>
+          <span style="display:block;font-family:'Unbounded',sans-serif;font-weight:700;font-size:17px;margin-top:3px">{{ d.date }}</span>
+          <span style="display:block;font-size:12.5px;font-weight:700;margin-top:4px">{{ d.price }} &#8364;</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;gap:12px">
+      <sc-for list="{{ legs }}" as="l" hint-placeholder-count="1">
+        <div data-v="tripcard" style="display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;background:transparent;border:1px solid rgba(255,255,255,0.1);background-color:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(20px,3vw,30px);animation:v3rise 0.45s ease both">
+          <div>
+            <div style="display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="{{ l.tagStyle }}">{{ l.tag }}</span>
+              <span style="font-size:13px;font-weight:700;color:#8FA8C6">{{ l.dateLabel }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:clamp(12px,2vw,26px);flex-wrap:wrap">
+              <div>
+                <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em">{{ l.depTime }}</div>
+                <div style="font-size:14px;font-weight:600;color:#8FA8C6;margin-top:4px">{{ l.fromName }}</div>
+              </div>
+              <div style="flex:1;min-width:92px;display:flex;flex-direction:column;align-items:center;gap:7px">
+                <span style="font-size:12px;font-weight:700;color:#F2B01E">{{ l.duration }}</span>
+                <span style="width:100%;height:1px;background:linear-gradient(90deg,rgba(242,176,30,0.85),rgba(255,255,255,0.12))"></span>
+              </div>
+              <div>
+                <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em">{{ l.arrTime }}</div>
+                <div style="font-size:14px;font-weight:600;color:#8FA8C6;margin-top:4px">{{ l.toName }}</div>
+              </div>
+            </div>
+            <dl class="route-addresses"><dt>{{ t.ui.boarding }}</dt><dd>{{ fromAddress }}</dd><dt>{{ t.ui.dropoff }}</dt><dd>{{ toAddress }}</dd></dl>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px">
+              <sc-for list="{{ l.tags }}" as="g" hint-placeholder-count="4">
+                <span style="padding:7px 12px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:12.5px;font-weight:600;color:#B9CBE1">{{ g }}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div data-v="tripprice" style="text-align:right;border-left:1px solid rgba(255,255,255,0.1);padding-left:clamp(20px,3vw,30px)">
+            <div style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ l.priceLabel }}</div>
+            <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,36px);color:#F2B01E;line-height:1.1;margin:6px 0 4px">{{ l.price }} &#8364;</div>
+            <div style="font-size:13px;font-weight:600;color:#8FA8C6">{{ l.perPerson }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px">
+      <div style="flex:1;min-width:min(100%,200px)">
+        <div style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ trip.priceLabel }}</div>
+        <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,34px);line-height:1.2">{{ trip.total }} &#8364;</div>
+        <div style="font-size:13px;font-weight:600;color:#6F8AA8;margin-top:4px">{{ trip.freeLine }}</div>
+      </div>
+      <a data-v="cta" href="#v3seats" style="padding:17px 30px;background:#F2B01E;color:#08182F;border-radius:13px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;transition:background 0.15s ease">{{ t.res.pick }}</a>
+    </div>
+    </sc-if>
+  </section>
+
+  <sc-if value="{{ routeReady }}">
+  <section id="v3seats" style="scroll-margin-top:86px;max-width:1320px;margin:0 auto;padding:clamp(38px,5vw,64px) clamp(16px,4vw,32px) 0">
+    <div data-v="split" style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(20px,3vw,34px);align-items:start">
+
+      <div data-v="seat-card" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(18px,2.6vw,26px)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px">
+          <span style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px">{{ t.seat.title }}</span>
+          <span style="font-size:13px;font-weight:700;color:#F2B01E">{{ seatCounter }}</span>
+        </div>
+        <div style="font-size:12.5px;color:#8FA8C6;font-weight:600;margin-bottom:14px">{{ t.seat.sub }}</div>
+        <div class="seat-options" role="group" aria-label="{{ t.seat.title }}">
+          <button type="button" aria-pressed="{{ anySeat }}" disabled="{{ sending }}" onClick="{{ chooseAnySeat }}">{{ t.ui.anySeat }}</button>
+          <button type="button" aria-pressed="{{ manualSeat }}" disabled="{{ sending }}" onClick="{{ chooseManualSeat }}">{{ t.ui.chooseSeat }}</button>
+        </div>
+        <p class="date-note">{{ t.ui.optionalSeat }}</p>
+        <sc-if value="{{ manualSeat }}">
+        <sc-if value="{{ needsRoute }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:14px;padding:13px 15px;border:1px dashed rgba(255,255,255,0.2);border-radius:11px;font-size:12.5px;font-weight:700;line-height:1.5;color:#B9CBE1">{{ t.res.empty }}</div>
+        </sc-if>
+        <sc-if value="{{ seatConflict }}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="margin-bottom:14px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:11px;font-size:12.5px;font-weight:700;line-height:1.5;color:#F0A6A6">{{ t.seatConflict }}</div>
+        </sc-if>
+        <sc-if value="{{ seatsLoading }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:14px;padding:11px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:11px;font-size:12.5px;font-weight:600;color:#B9CBE1">{{ t.seat.loading }}</div>
+        </sc-if>
+        <sc-if value="{{ seatsFailed }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:14px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:11px">
+            <div style="font-size:12.5px;font-weight:600;line-height:1.5;color:#F0A6A6">{{ t.seatsError }}</div>
+            <button type="button" onClick="{{ retrySeats }}" style="margin-top:10px;padding:9px 16px;min-height:40px;background:rgba(255,255,255,0.1);color:#F5F8FC;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">{{ t.retry }}</button>
+          </div>
+        </sc-if>
+        <div style="border:1px solid rgba(255,255,255,0.12);border-radius:20px 20px 12px 12px;padding:14px 12px 16px;background:rgba(255,255,255,0.02)">
+          <div style="display:flex;align-items:center;justify-content:flex-start;gap:10px;padding:0 4px 12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:12px">
+            <span style="width:28px;height:28px;border-radius:50%;border:2px solid #3E5A80"></span>
+            <span style="font-size:13px;font-weight:700;letter-spacing:0.02em;text-transform:none;color:#6F8AA8">{{ t.seat.driver }} · {{ t.ui.front }}</span>
+          </div>
+          <div class="cabin-windows"><span>{{ t.ui.windows }}</span><span>{{ t.ui.windows }}</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 14px 1fr 1fr;gap:6px;border-left:3px dashed #6F8AA8;border-right:3px dashed #6F8AA8;padding:0 7px">
+            <sc-for list="{{ seats }}" as="s" hint-placeholder-count="50">
+              <button aria-label="{{ s.label }}" aria-pressed="{{ s.selected }}" data-status="{{ s.status }}" data-v="seat" onClick="{{ s.onClick }}" disabled="{{ s.off }}" style="{{ s.style }}">{{ s.n }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;font-size:12px;font-weight:600;color:#8FA8C6">
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:4px;background:#F2B01E"></span>{{ t.seat.picked }}</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2)"></span>{{ t.seat.free }}</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07)"></span>{{ t.seat.taken }}</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:4px;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.16)"></span>{{ t.seat.blocked }}</span>
+        </div>
+        <div class="cabin-rear">{{ t.ui.rear }}</div>
+        </sc-if>
+      </div>
+
+      <div>
+        <div id="v3pax" style="scroll-margin-top:86px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(18px,2.6vw,28px)">
+          <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;margin-bottom:18px">{{ t.pax.title }}</div>
+          <sc-for list="{{ paxRows }}" as="p" hint-placeholder-count="1">
+            <div style="{{ p.wrapStyle }}">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px">
+                <span style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ p.title }}</span>
+                <span style="font-size:12.5px;font-weight:700;color:#F5F8FC">{{ t.f.seat }} {{ p.seat }}</span>
+              </div>
+              <div data-v="paxgrid" style="display:grid;gap:12px">
+                <label style="display:flex;flex-direction:column;gap:7px">
+                  <span style="{{ lblLight }}">{{ t.f.first }}</span>
+                  <input disabled="{{ sending }}" type="text" aria-invalid="{{ p.firstInvalid }}" value="{{ p.first }}" onChange="{{ p.onFirst }}" autocomplete="{{ p.acFirst }}" placeholder="{{ t.ph.first }}" style="{{ p.firstStyle }}" />
+                </label>
+                <label style="display:flex;flex-direction:column;gap:7px">
+                  <span style="{{ lblLight }}">{{ t.f.last }}</span>
+                  <input disabled="{{ sending }}" type="text" aria-invalid="{{ p.lastInvalid }}" value="{{ p.last }}" onChange="{{ p.onLast }}" autocomplete="{{ p.acLast }}" placeholder="{{ t.ph.last }}" style="{{ p.lastStyle }}" />
+                </label>
+                <label style="display:flex;flex-direction:column;gap:7px">
+                  <span style="{{ lblLight }}">{{ t.f.phone }}</span>
+                  <input disabled="{{ sending }}" type="tel" aria-invalid="{{ p.phoneInvalid }}" value="{{ p.phone }}" onChange="{{ p.onPhone }}" autocomplete="{{ p.acPhone }}" inputmode="tel" placeholder="+380 __ ___ __ __" style="{{ p.phoneStyle }}" />
+                  <sc-if value="{{ p.phoneInvalid }}"><span class="field-error">{{ t.ui.phoneError }}</span></sc-if>
+                </label>
+              </div>
+            </div>
+          </sc-for>
+
+          <div style="margin-top:18px">
+            <label style="display:flex;flex-direction:column;gap:7px;max-width:520px">
+              <span style="{{ lblLight }}">{{ t.f.email }}</span>
+              <input disabled="{{ sending }}" type="email" value="{{ email }}" onChange="{{ onEmail }}" autocomplete="email" inputmode="email" placeholder="{{ t.ph2.email }}" style="{{ inpLight }}" />
+              <span style="font-size:13px;font-weight:600;color:#A9C0DA;line-height:1.45">{{ t.f.emailNote }}</span>
+            </label>
+          </div>
+          <details style="margin-top:18px;border:1px solid rgba(255,255,255,0.12);border-radius:16px;background:rgba(255,255,255,0.03)">
+          <summary style="display:flex;align-items:center;gap:14px;padding:16px 18px;min-height:56px;cursor:pointer">
+            <span style="flex:1;min-width:0">
+              <span style="display:block;font-family:'Unbounded',sans-serif;font-weight:500;font-size:15px;color:#F5F8FC">{{ t.bar.extra }}</span>
+              <span style="display:block;font-size:12.5px;font-weight:600;color:#8FA8C6;margin-top:4px;line-height:1.45">{{ t.bar.extraSub }}</span>
+            </span>
+            <span data-v="chev" style="width:32px;height:32px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(242,176,30,0.14);color:#F2B01E;font-size:20px;font-weight:700;transition:transform 0.2s ease">+</span>
+          </summary>
+          <div style="padding:0 18px 18px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="{{ lblLight }}">{{ t.f.comment }}</span>
+              <input disabled="{{ sending }}" type="text" value="{{ comment }}" onChange="{{ onComment }}" placeholder="{{ t.ph2.comment }}" style="{{ inpLight }}" />
+            </label>
+          </div>
+
+          <div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1)">
+            <div style="font-family:'Unbounded',sans-serif;font-weight:500;font-size:15px;margin-bottom:14px">{{ t.f.bag }}</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+              <sc-for list="{{ bagRules }}" as="b" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;gap:8px;padding:9px 14px;background:rgba(242,176,30,0.1);border:1px solid rgba(242,176,30,0.28);border-radius:99px;font-size:13px;font-weight:600;color:#F2B01E">{{ b }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <span style="font-size:13.5px;font-weight:600;color:#B9CBE1;flex:1;min-width:min(100%,220px)">{{ t.f.extraKg }}</span>
+              <div style="display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:4px">
+                <button type="button" onClick="{{ kgMinus }}" aria-label="-1 kg" style="{{ stepBtn }}">&#8722;</button>
+                <span style="min-width:64px;text-align:center;font-family:'Unbounded',sans-serif;font-weight:500;font-size:16px;color:#F5F8FC;font-variant-numeric:tabular-nums">{{ kgLabel }}</span>
+                <button type="button" onClick="{{ kgPlus }}" aria-label="+1 kg" style="{{ stepBtn }}">+</button>
+              </div>
+              <span style="font-family:'Unbounded',sans-serif;font-weight:500;font-size:17px;color:#F2B01E;min-width:76px;text-align:right">{{ kgCost }} &#8364;</span>
+            </div>
+          </div>
+          </div>
+          </details>
+
+          <label style="{{ consentWrap }}">
+            <input disabled="{{ sending }}" type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="{{ consentBox }}" />
+            <span style="font-size:13.5px;font-weight:600;line-height:1.55;color:#B9CBE1">{{ t.consentA }}<a href="/oferta.html" target="_blank" rel="noopener">{{ t.consentOferta }}</a>{{ t.consentB }}<a href="/privacy.html" target="_blank" rel="noopener">{{ t.consentPrivacy }}</a></span>
+          </label>
+
+          <div ref="{{ errRef }}">
+            <sc-if value="{{ showErrors }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin-top:16px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:12px;font-size:13.5px;font-weight:600;color:#F0A6A6">{{ errorText }}</div>
+            </sc-if>
+            <sc-if value="{{ seatConflict }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin-top:16px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:12px;font-size:13.5px;font-weight:700;color:#F0A6A6">{{ t.seatConflict }}</div>
+            </sc-if>
+            <sc-if value="{{ dupShown }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin-top:16px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:12px;font-size:13.5px;font-weight:700;line-height:1.5;color:#F0A6A6">{{ dupText }}</div>
+            </sc-if>
+            <sc-if value="{{ sendFailed }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="margin-top:16px;padding:13px 15px;background:rgba(206,43,55,0.14);border:1px solid rgba(206,43,55,0.42);border-radius:12px;font-size:13.5px;font-weight:700;color:#F0A6A6">{{ t.sendError }}</div>
+              <div class="send-fallback"><p>{{ t.ui.sendFallback }}</p><a class="fallback-wa" href="{{ applicationWhatsApp }}" target="_blank" rel="noopener">{{ t.ui.sendWhatsApp }}</a><a href="{{ callHref }}">{{ helpPhone }}</a></div>
+          </sc-if>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;background:#F5F8FC;color:#061225;border-radius:20px;overflow:hidden">
+          <div style="padding:clamp(18px,2.6vw,26px)">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+              <span style="font-size:13px;font-weight:800;letter-spacing:0.16em;text-transform:none;color:#885C00">{{ t.pass.title }}</span>
+              <span style="font-size:13px;font-weight:700;color:#41597A">{{ t.pass.code }} {{ pass.code }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:clamp(12px,2vw,22px);margin-top:16px;flex-wrap:wrap">
+              <div>
+                <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(20px,2.4vw,27px);letter-spacing:-0.025em">{{ pass.from }}</div>
+                <sc-if value="{{ routeReady }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:12.5px;font-weight:700;color:#41597A;margin-top:3px">{{ pass.depTime }}</div>
+                </sc-if>
+              </div>
+              <span style="color:#885C00;font-size:18px;font-weight:800">&#8594;</span>
+              <div>
+                <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(20px,2.4vw,27px);letter-spacing:-0.025em">{{ pass.to }}</div>
+                <sc-if value="{{ routeReady }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:12.5px;font-weight:700;color:#41597A;margin-top:3px">{{ pass.arrTime }}</div>
+                </sc-if>
+              </div>
+            </div>
+            <dl class="route-addresses"><dt>{{ t.ui.boarding }}</dt><dd>{{ fromAddress }}</dd><dt>{{ t.ui.dropoff }}</dt><dd>{{ toAddress }}</dd></dl>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,110px),1fr));gap:14px;margin-top:20px">
+              <div>
+                <div style="{{ ticketLbl }}">{{ t.f.dateOut }}</div>
+                <div style="{{ passVal }}">{{ pass.dateOut }}</div>
+              </div>
+              <div>
+                <div style="{{ ticketLbl }}">{{ t.f.seat }}</div>
+                <div style="{{ passVal }}">{{ pass.seats }}</div>
+              </div>
+              <div>
+                <div style="{{ ticketLbl }}">{{ t.f.pax }}</div>
+                <div style="{{ passVal }}">{{ pass.pax }}</div>
+              </div>
+              <div>
+                <div style="{{ ticketLbl }}">{{ t.f.name }}</div>
+                <div style="{{ passVal }}">{{ pass.lead }}</div>
+              </div>
+            </div>
+          </div>
+          <div style="position:relative;height:22px;background:#F5F8FC">
+            <span style="position:absolute;left:-11px;top:0;width:22px;height:22px;border-radius:50%;background:#061225"></span>
+            <span style="position:absolute;right:-11px;top:0;width:22px;height:22px;border-radius:50%;background:#061225"></span>
+            <span style="position:absolute;left:16px;right:16px;top:11px;border-top:1px dashed rgba(6,18,37,0.24)"></span>
+          </div>
+          <div style="padding:0 clamp(18px,2.6vw,26px) 12px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap">
+            <div>
+              <div style="{{ ticketLbl }}">{{ t.f.total }}</div>
+              <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,34px);color:#061225;line-height:1.15">{{ totalText }}</div>
+              <div style="display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13px;font-weight:700;color:#0B6E40">
+                <span style="display:inline-flex;width:19px;height:14px;flex:0 0 auto;border-radius:3px;border:1.5px solid #0B6E40;align-items:center;justify-content:center">
+                  <span style="width:5px;height:5px;border-radius:50%;background:#0B6E40"></span>
+                </span>
+                {{ t.payNote }}
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-left:auto;flex-wrap:wrap;flex:1;min-width:min(100%,250px)">
+              <button type="button" onClick="{{ doSubmit }}" disabled="{{ submitDisabled }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
+            </div>
+          </div>
+          <div style="padding:0 clamp(18px,2.6vw,26px) clamp(18px,2.6vw,26px);display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:12.5px;font-weight:700;color:#41597A">{{ t.bar.ask }}</span>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <a href="{{ applicationWhatsApp }}" target="_blank" rel="noopener" style="flex:1;min-width:130px;min-height:50px;display:flex;align-items:center;justify-content:center;background:#25D366;color:#062B14;border-radius:12px;font-weight:800;font-size:14.5px">WhatsApp</a>
+              <a href="{{ viberHref }}" style="flex:1;min-width:130px;min-height:50px;display:flex;align-items:center;justify-content:center;background:transparent;color:#5A48D8;border:1.5px solid rgba(115,96,242,0.55);border-radius:12px;font-weight:800;font-size:14.5px">Viber</a>
+            </div>
+            <button type="button" class="copy-viber" onClick="{{ copyApplication }}">{{ t.ui.copyForViber }}</button>
+          </div>
+          <sc-if value="{{ sentId }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:0 clamp(18px,2.6vw,26px) clamp(18px,2.6vw,26px);padding:15px 17px;background:rgba(14,138,79,0.12);border:1px solid rgba(14,138,79,0.4);border-radius:12px">
+              <div style="font-size:14.5px;font-weight:800;color:#0B6E40">{{ sentText }}</div>
+              <div style="font-size:13px;font-weight:600;color:#41597A;margin-top:5px">{{ t.sendOkNote }}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ sendFailed }}" hint-placeholder-val="{{ false }}">
+            <div style="margin:0 clamp(18px,2.6vw,26px) clamp(18px,2.6vw,26px);padding:15px 17px;background:rgba(206,43,55,0.1);border:1px solid rgba(206,43,55,0.4);border-radius:12px;font-size:14px;font-weight:700;color:#A32330">{{ t.sendError }}</div>
+          </sc-if>
+        </div>
+        <div style="margin-top:12px;font-size:13px;line-height:1.55;color:#A9C0DA;font-weight:600">{{ t.pass.note }}</div>
+      </div>
+    </div>
+  </section>
+
+  </sc-if>
+
+  <section id="v3stops" style="scroll-margin-top:86px;max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,72px) clamp(16px,4vw,32px) 0">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+      <h2 style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.03em;margin:0">{{ t.stops.title }}</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <sc-for list="{{ t.onboard }}" as="i" hint-placeholder-count="4">
+        <div style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:16px;padding:20px">
+          <div style="font-family:'Unbounded',sans-serif;font-size:15.5px;font-weight:700;margin-bottom:7px">{{ i.t }}</div>
+          <div style="font-size:13px;line-height:1.5;color:#8FA8C6;font-weight:500">{{ i.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="v3faq" style="scroll-margin-top:86px;max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,72px) clamp(16px,4vw,32px) clamp(46px,6vw,76px)">
+    <h2 style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.03em;margin:0 0 22px">{{ t.faq.title }}</h2>
+    <div class="faq-layout">
+    <div style="display:grid;gap:10px">
+      <sc-for list="{{ faqRows }}" as="q">
+        <details class="faq-item" open="{{ q.open }}" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:16px;overflow:hidden">
+          <summary style="display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;min-height:60px">
+            <span style="flex:1;font-size:15.5px;font-weight:700;color:#F5F8FC">{{ q.q }}</span>
+            <span data-v="chev" class="faq-plus" aria-hidden="true">+</span>
+          </summary>
+          <div style="padding:0 20px 20px;font-size:14.5px;line-height:1.6;color:#B9CBE1;font-weight:500;max-width:70ch">{{ q.a }}</div>
+        </details>
+      </sc-for>
+    </div>
+    <aside class="faq-help"><h3>{{ t.ui.help }}</h3><p>{{ t.ui.helpSub }}</p><a class="help-phone" href="{{ callHref }}">{{ helpPhone }}</a><div class="help-links"><a href="{{ waHref }}" rel="noopener" target="_blank">WhatsApp</a><a href="{{ viberHref }}">Viber</a></div></aside>
+    </div>
+  </section>
+
+  </main>
+
+  <footer style="border-top:1px solid rgba(255,255,255,0.08);background:radial-gradient(110% 80% at 85% 0%,rgba(18,69,127,0.38) 0%,rgba(6,18,37,0) 62%);padding:clamp(40px,6vw,64px) clamp(16px,4vw,32px) 34px">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(26px,4vw,44px)">
+      <div>
+        <img src="/brand-sm.webp" srcset="/brand-sm.webp 190w, /brand-sm-380.webp 380w" sizes="185px" width="190" height="107" alt="Avtobus v Italiu" loading="lazy" decoding="async" style="height:clamp(80px,8vw,104px);width:auto;display:block" />
+        <a href="mailto:Oktobus109@gmail.com" style="display:inline-block;margin-top:16px;font-size:14.5px;font-weight:600;color:#B9CBE1">Oktobus109@gmail.com</a>
+        <div style="margin-top:10px;font-size:13.5px;font-weight:600;line-height:1.5;color:#8FA8C6">{{ t.footer.hours }}</div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:none;color:#F2B01E;margin-bottom:16px">{{ t.footer.ua }}</div>
+        <a href="tel:+380674704617" style="display:block;font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;color:#F5F8FC;margin-bottom:12px">+380 67 470 46 17</a>
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+          <a href="https://wa.me/380674704617" style="padding:10px 16px;background:rgba(37,211,102,0.14);color:#4BE58C;border-radius:10px;font-size:13px;font-weight:700">WhatsApp</a>
+          <a href="viber://chat?number=%2B380674704617" style="padding:10px 16px;background:rgba(115,96,242,0.18);color:#B0A4FF;border-radius:10px;font-size:13px;font-weight:700">Viber</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:800;letter-spacing:0.14em;text-transform:none;color:#F2B01E;margin-bottom:16px">{{ t.footer.it }}</div>
+        <a href="tel:+393245958718" style="display:block;font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;color:#F5F8FC;margin-bottom:12px">+39 324 595 8718</a>
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+          <a href="https://wa.me/393245958718" style="padding:10px 16px;background:rgba(37,211,102,0.14);color:#4BE58C;border-radius:10px;font-size:13px;font-weight:700">WhatsApp</a>
+          <a href="viber://chat?number=%2B393245958718" style="padding:10px 16px;background:rgba(115,96,242,0.18);color:#B0A4FF;border-radius:10px;font-size:13px;font-weight:700">Viber</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1320px;margin:26px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;font-weight:600;color:#6F8AA8">
+      <span>&#169; 2026 Avtobus v Italiu</span>
+      <span style="display:flex;gap:16px;flex-wrap:wrap">
+        <a href="/oferta.html" style="color:#8FA8C6">{{ t.legal.oferta }}</a>
+        <a href="/oferta.html#refund" style="color:#8FA8C6">{{ t.legal.refund }}</a>
+        <a href="/oferta.html#contacts" style="color:#8FA8C6">{{ t.legal.contacts }}</a>
+        <a href="/privacy.html" style="color:#8FA8C6">{{ t.legal.privacy }}</a>
+      </span>
+    </div>
+  </footer>
+
+  <div data-v="mbar" data-active="{{ routeReady }}" style="{{ mbarStyle }}">
+    <sc-if value="{{ barSent }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;min-width:0;font-size:14.5px;font-weight:800;line-height:1.35;color:#4ED88A">{{ barSentText }}</div>
+    </sc-if>
+    <sc-if value="{{ barOpen }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:none">
+          <sc-for list="{{ barSteps }}" as="b" hint-placeholder-count="3">
+            <span style="{{ b.style }}">{{ b.label }}</span>
+          </sc-for>
+        </div>
+        <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:19px;color:#F2B01E;line-height:1.2;margin-top:3px">{{ totalText }}</div>
+      </div>
+      <button type="button" onClick="{{ barAction }}" disabled="{{ submitDisabled }}" style="min-height:50px;padding:0 16px;background:#F2B01E;color:#08182F;border:none;border-radius:12px;font-weight:800;font-size:14.5px;cursor:pointer;white-space:nowrap">{{ barLabel }}</button>
+    </sc-if>
+    <a href="{{ waChatHref }}" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:50px;height:50px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:#25D366;color:#062B14;border-radius:12px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path></svg>
+    </a>
+  </div>
+
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" role="dialog" aria-modal="true" aria-labelledby="booking-confirmation" style="position:fixed;inset:0;z-index:120;background:rgba(3,10,22,0.78);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto">
+      <div onClick="{{ stopClick }}" style="width:100%;max-width:440px;background:#F5F8FC;color:#061225;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.55);margin:auto">
+        <div style="padding:26px 24px 20px;background:#061225;color:#F5F8FC;position:relative">
+          <button type="button" onClick="{{ closeModal }}" aria-label="{{ t.modal.close }}" style="position:absolute;top:12px;right:12px;width:44px;height:44px;border:none;border-radius:12px;background:rgba(255,255,255,0.08);color:#F5F8FC;font-size:22px;line-height:1;cursor:pointer">&#215;</button>
+          <span style="display:inline-flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:50%;background:#0E8A4F;color:#FFFFFF;font-size:24px;font-weight:800">&#10003;</span>
+          <div id="booking-confirmation" style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:21px;line-height:1.25;margin-top:14px;padding-right:40px">{{ t.modal.title }}</div>
+          <div style="font-size:13px;font-weight:700;color:#8FA8C6;margin-top:12px;letter-spacing:0.06em;text-transform:none">{{ t.modal.no }}</div>
+          <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;color:#F2B01E;margin-top:3px">{{ sentId }}</div>
+          <div style="font-size:14px;font-weight:600;line-height:1.5;color:#B9CBE1;margin-top:10px">{{ t.sendOkNote }}</div>
+        </div>
+        <div style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:16px">
+          <div><strong>{{ pass.from }} → {{ pass.to }}</strong><p>{{ pass.dateOut }} · {{ pass.depTime }}</p><dl class="route-addresses"><dt>{{ t.ui.boarding }}</dt><dd>{{ fromAddress }}</dd><dt>{{ t.ui.dropoff }}</dt><dd>{{ toAddress }}</dd></dl></div>
+          <div style="font-size:13px;font-weight:800;letter-spacing:0.02em;text-transform:none;color:#41597A">{{ t.modal.contacts }}</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:#41597A">
+              <span style="width:18px;height:12px;border-radius:2px;overflow:hidden;display:flex;flex-direction:column;flex:0 0 auto"><span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span></span>
+              {{ t.footer.ua }} &middot; +380 67 470 46 17
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+              <a href="tel:+380674704617" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#061225;color:#F5F8FC;font-size:13.5px;font-weight:800">{{ t.modal.call }}</a>
+              <a href="https://wa.me/380674704617" target="_blank" rel="noopener" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#25D366;color:#062B14;font-size:13.5px;font-weight:800">WhatsApp</a>
+              <a href="viber://chat?number=%2B380674704617" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#7360F2;color:#FFFFFF;font-size:13.5px;font-weight:800">Viber</a>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:#41597A">
+              <span style="width:18px;height:12px;border-radius:2px;overflow:hidden;display:flex;flex:0 0 auto"><span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span></span>
+              {{ t.footer.it }} &middot; +39 324 595 8718
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+              <a href="tel:+393245958718" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#061225;color:#F5F8FC;font-size:13.5px;font-weight:800">{{ t.modal.call }}</a>
+              <a href="https://wa.me/393245958718" target="_blank" rel="noopener" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#25D366;color:#062B14;font-size:13.5px;font-weight:800">WhatsApp</a>
+              <a href="viber://chat?number=%2B393245958718" style="min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:#7360F2;color:#FFFFFF;font-size:13.5px;font-weight:800">Viber</a>
+            </div>
+          </div>
+          <button type="button" onClick="{{ closeModal }}" style="min-height:48px;border:1px solid rgba(6,18,37,0.18);border-radius:12px;background:transparent;color:#061225;font-size:14.5px;font-weight:800;cursor:pointer">{{ t.modal.close }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" aria-live="polite" style="position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99;width:calc(100% - 32px);max-width:520px;background:#F5F8FC;color:#061225;padding:15px 22px;border-radius:14px;font-size:14px;font-weight:700;text-align:center;box-shadow:0 20px 44px rgba(0,0,0,0.45)">{{ toast }}</div>
+  </sc-if>
+</div>
+
