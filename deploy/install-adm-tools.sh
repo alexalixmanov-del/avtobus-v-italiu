@@ -3,8 +3,8 @@ site_dir='/home/xk589064/dg-s.space/avtobus-v-italiu'
 backup_dir='/home/xk589064/site-backups'
 test -f "$site_dir/index.html"
 work_dir=$(mktemp -d)
-curl -fL --connect-timeout 15 --max-time 120 'https://raw.githubusercontent.com/alexalixmanov-del/avtobus-v-italiu/00958bb8aa746ea3a65e83c971974efe2c2bfc13/deploy/avtobus-v-italiu-ready.zip' -o "$work_dir/site.zip"
-printf '%s  %s\n' 'c7ccd7478d4c7690a1db00cae8a6afe110c0983341762ab9ac4186724102b7bb' "$work_dir/site.zip" | sha256sum -c -
+curl -fL --connect-timeout 15 --max-time 120 'https://raw.githubusercontent.com/alexalixmanov-del/avtobus-v-italiu/ed168b97beb273f728eee95a0cbd2c10043a1fb9/deploy/avtobus-v-italiu-ready.zip' -o "$work_dir/site.zip"
+printf '%s  %s\n' '2cba31d27669ec82cf1985d11abff110bab2ec83031d258b11f2bd1e0ff7959e' "$work_dir/site.zip" | sha256sum -c -
 unzip -q "$work_dir/site.zip" -d "$work_dir/new" -x DEPLOY.txt
 mkdir -p "$backup_dir"
 backup_file="$backup_dir/avtobus-$(date +%Y%m%d-%H%M%S).tar.gz"
