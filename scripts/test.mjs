@@ -4,6 +4,7 @@ import { existsSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { resolve, extname } from 'node:path';
 import { chromium } from 'playwright';
+import { testImprovements } from './test-improvements.mjs';
 
 const root = resolve('dist');
 const types = {'.html':'text/html; charset=utf-8','.js':'text/javascript','.webp':'image/webp','.png':'image/png','.woff2':'font/woff2','.xml':'application/xml','.txt':'text/plain'};
@@ -28,6 +29,11 @@ async function audit(page) {
   await page.addScriptTag({path:'node_modules/axe-core/axe.min.js'});
   const result = await page.evaluate(()=>axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
   assert.deepEqual(result.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})), []);
+}
+async function openManualSeats(page) {
+  const button = page.getByRole('button',{name:'Обрати місце на схемі',exact:true});
+  if (!await button.isVisible()) await page.locator('.seat-picker > summary').click();
+  await button.click();
 }
 const pass = name => { checks++; console.log('PASS ' + name); };
 try {
@@ -90,7 +96,7 @@ try {
     await selects.nth(1).selectOption('trieste');
     await selects.nth(2).selectOption({index:1});
     assert.equal(await page.locator('[data-v=seat]').count(),0);
-    await page.getByRole('button',{name:'Обрати місце на схемі',exact:true}).click();
+    await openManualSeats(page);
     await page.waitForFunction(()=>document.querySelector('[data-v="seat"][data-status="taken"]'));
     if(width===390) await audit(page);
     const taken=page.locator('[data-v="seat"]').filter({hasText:/^2$/});
@@ -124,6 +130,7 @@ try {
     }
     assert.equal(requests.filter(r=>r.url()===base+'/' && r.resourceType()!=='document').length,0);
     assert.deepEqual(errors,[]);
+    await page.evaluate(()=>sessionStorage.clear());
     await page.goto(base+'/');
     await page.evaluate(()=>document.fonts.ready);
     await page.waitForTimeout(750);
@@ -147,7 +154,7 @@ try {
   await selects.nth(0).selectOption('lviv');
   await selects.nth(1).selectOption('trieste');
   await selects.nth(2).selectOption({index:1});
-  await page.getByRole('button',{name:'Обрати місце на схемі',exact:true}).click();
+  await openManualSeats(page);
   await page.locator('[data-v="seat"]').filter({hasText:/^1$/}).click();
   await page.locator('#v3pax input[type="text"]').nth(0).fill('Тест');
   await page.locator('#v3pax input[type="text"]').nth(1).fill('Пасажир');
@@ -192,6 +199,7 @@ try {
   await context.close();
   pass('phone validation, seat conflict, retry, price, confirmation and Escape (mock API only)');
   await testP0(browser,base,pass);
+  await testImprovements(browser,base,pass);
   console.log(`${checks} scenario groups passed. No real applications submitted.`);
 } finally {
   await browser.close();
@@ -263,7 +271,7 @@ async function testP0(browser,base,pass) {
   assert(href.includes('text='));
   assert(decodeURIComponent(href).includes('Будь-яке'));
   assert.equal(posts,0);
-  await page.getByRole('button',{name:'Обрати місце на схемі',exact:true}).click();
+  await openManualSeats(page);
   await page.waitForFunction(()=>document.querySelector('[data-v=seat]:not(:disabled)'));
   assert.equal(gets,1);
   await page.clock.fastForward(59000);
@@ -275,7 +283,7 @@ async function testP0(browser,base,pass) {
   await page.waitForTimeout(100);
   assert.equal(gets,2);
   mode='hang';
-  await page.getByRole('button',{name:'Обрати місце на схемі',exact:true}).click();
+  await openManualSeats(page);
   assert.equal(gets,3);
   await page.clock.fastForward(10001);
   await page.getByText(T.ua.ui.seatsUnavailable,{exact:true}).waitFor();

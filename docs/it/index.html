@@ -255,10 +255,74 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
   [data-v="direction"] > span { display:none !important; }
   [data-v="cta"] { padding:18px 56px 18px 18px !important; }
   header a[hreflang] { min-width:32px !important; padding:6px 4px !important; }
-  [data-v="seat-card"] { padding:12px !important; }
   [data-v="hero-image"] + div { background:linear-gradient(180deg,rgba(6,18,37,.82),rgba(6,18,37,.35) 170px,#061225 300px) !important; }
 }
-</style><script defer src="/avtobus-v-italiu/assets/vendor/react.production.min.js"></script><script defer src="/avtobus-v-italiu/assets/vendor/react-dom.production.min.js"></script><script defer src="/avtobus-v-italiu/assets/app.js"></script><meta name="robots" content="noindex, follow"></head><body>
+
+/* Keep the mobile route and booking flow compact. */
+.trip-details { grid-column:1 / -1; border-top:1px solid rgba(255,255,255,.12); }
+.trip-details > summary { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px; padding:8px 0; font-size:14px; font-weight:700; cursor:pointer; }
+.trip-details[open] .faq-plus { transform:rotate(45deg); }
+.trip-times { display:grid !important; grid-template-columns:minmax(0,1fr) minmax(58px,.55fr) minmax(0,1fr); gap:12px !important; }
+.trip-times > div:last-child { text-align:right; }
+.trip-times > div:nth-child(2) { min-width:0 !important; }
+.trip-continue { display:flex; justify-content:flex-end; align-items:center; min-height:44px; font-size:15px; font-weight:700; }
+[data-v="split"] { display:flex !important; flex-direction:column; gap:16px !important; max-width:900px; margin:0 auto; }
+[data-v="split"] > * { width:100%; }
+.seat-picker { border:1px solid rgba(255,255,255,.16); border-radius:16px; background:rgba(255,255,255,.03); }
+.seat-picker > summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 18px; cursor:pointer; min-height:60px; }
+.seat-picker strong { display:block; font-size:15px; font-weight:700; line-height:1.45; }
+.seat-picker small { display:block; margin-top:3px; font-size:13px; color:#A9C0DA; line-height:1.4; }
+.seat-picker[open] > summary .faq-plus { transform:rotate(45deg); }
+.seat-picker-body { max-width:480px; margin:0 auto; padding:0 18px 18px; }
+.onboard-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.bar-price > span { display:block; font-size:12px; font-weight:600; color:#A9C0DA; }
+[data-v="mbar"] > button { flex:1; min-width:0; white-space:normal !important; line-height:1.3; }
+.field-error { margin:0; }
+#booking-consent-error { margin-top:8px; }
+#v3pax input:-webkit-autofill,
+#v3pax input:-webkit-autofill:hover,
+#v3pax input:-webkit-autofill:focus {
+  -webkit-text-fill-color:#F5F8FC;
+  caret-color:#F5F8FC;
+  -webkit-box-shadow:0 0 0 1000px #1C2B3E inset;
+  box-shadow:0 0 0 1000px #1C2B3E inset;
+}
+#v3pax input[aria-invalid="true"]:-webkit-autofill {
+  -webkit-box-shadow:0 0 0 1000px #30202A inset;
+  box-shadow:0 0 0 1000px #30202A inset;
+}
+@media(max-width:940px) {
+  .onboard-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  [data-v="mbar"] { padding:8px 16px calc(8px + env(safe-area-inset-bottom)) !important; gap:12px !important; }
+  [data-v="mbar"] > button { min-height:48px !important; padding:8px 12px !important; }
+}
+@media(max-width:580px) {
+  .seat-picker-body { padding:0 10px 14px; }
+  #v3results, #v3seats { padding-top:24px !important; }
+  #v3results h2 { font-size:21px !important; line-height:1.35; }
+  #v3results > div:first-child { margin-bottom:12px !important; }
+  #v3results > div:first-child > span { display:none; }
+  .date-strip { padding-bottom:12px !important; }
+  [data-v="tripcard"] { padding:16px !important; gap:12px !important; }
+  .trip-meta { margin-bottom:10px !important; }
+  .trip-times > div > div:first-child { font-size:clamp(18px,4.8vw,24px) !important; }
+  [data-v="tripprice"] { display:grid; grid-template-columns:1fr auto; align-items:center; gap:4px 12px; padding:10px 0 0 !important; }
+  [data-v="tripprice"] > div:nth-child(2) { font-size:26px !important; margin:0 !important; }
+  [data-v="tripprice"] > div:last-child { grid-column:1 / -1; }
+  .onboard-grid { grid-template-columns:minmax(0,1fr); }
+  [data-v="searchgrid"] { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  [data-v="searchgrid"] > label { grid-column:1 / -1; }
+  [data-v="searchgrid"] > .search-date, [data-v="searchgrid"] > .search-passengers { grid-column:auto; }
+  .search-date svg { display:none; }
+  .search-date select { padding-left:12px !important; padding-right:24px !important; background-position:right 10px center; }
+  .passenger-heading { flex-direction:column; gap:4px !important; }
+  .passenger-heading > span { font-size:13px !important; letter-spacing:normal !important; }
+  #v3pax label > span:first-child { font-size:14px !important; }
+}
+@media(max-width:360px) {
+  [data-v="searchgrid"] > .search-date, [data-v="searchgrid"] > .search-passengers { grid-column:1 / -1; }
+}
+</style><script defer src="/avtobus-v-italiu/assets/vendor/react.production.min.js"></script><script defer src="/avtobus-v-italiu/assets/vendor/react-dom.production.min.js"></script><script defer src="/avtobus-v-italiu/assets/app.js?v=c8a602466b54"></script><meta name="robots" content="noindex, follow"></head><body>
 <div id="app">
 
 <div translate="no" class="notranslate" style="background:#061225">
@@ -351,7 +415,7 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
               <span style="position:relative;display:block">
                 <!-- -->
                 <!-- -->
-                <select style="padding:16px 15px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
+                <select id="booking-from" style="padding:16px 15px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
                   <!-- -->
                     <option value="" selected="">Scegli la città</option>
                   <!-- -->
@@ -382,7 +446,7 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
               <span style="position:relative;display:block">
                 <!-- -->
                 <!-- -->
-                <select style="padding:16px 15px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
+                <select id="booking-to" style="padding:16px 15px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
                   <!-- -->
                     <option value="" selected="">Scegli la città</option>
                   <!-- -->
@@ -414,11 +478,11 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
               </span>
             </label>
 
-            <label style="display:flex;flex-direction:column;gap:10px">
+            <label class="search-date" style="display:flex;flex-direction:column;gap:10px">
               <span style="font-size:13px;font-weight:700;letter-spacing:0.02em;text-transform:none;color:#A9C0DA">Data di partenza</span>
               <span style="position:relative;display:block">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
-                <select style="padding:16px 15px 16px 48px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
+                <select id="booking-date" style="padding:16px 15px 16px 48px;min-height:58px;border:1px solid rgba(255,255,255,0.14);border-radius:13px;font-size:16px;font-weight:600;color:#9DB3CD;background:rgba(255,255,255,0.06);width:100%">
                   <!-- -->
                     <option value="" selected="">Scegli la data</option>
                   <!-- -->
@@ -450,7 +514,7 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
               </span>
             </label>
 
-            <label style="display:flex;flex-direction:column;gap:10px">
+            <label class="search-passengers" style="display:flex;flex-direction:column;gap:10px">
               <span style="font-size:13px;font-weight:700;letter-spacing:0.02em;text-transform:none;color:#A9C0DA">Passeggeri</span>
               <span style="position:relative;display:block">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c1.4-4 4-6 7.5-6s6.1 2 7.5 6"></path></svg>
@@ -484,7 +548,7 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
           <!-- -->
             <span style="display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;color:#C6D5E8">
               <span style="width:20px;height:20px;flex:0 0 auto;border-radius:50%;border:1.5px solid #F2B01E;color:#F2B01E;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">✓</span>
-              Partenza ogni martedì
+              Partenza: martedì / mercoledì
             </span>
           <!-- -->
             <span style="display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:500;color:#C6D5E8">
@@ -527,7 +591,7 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
       <h2 style="font-family:&#x27;Unbounded&#x27;,sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.03em;margin:0">Cosa include il viaggio</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+    <div class="onboard-grid" style="display:grid;gap:14px">
       <!-- -->
         <div style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:16px;padding:20px">
           <div style="font-family:&#x27;Unbounded&#x27;,sans-serif;font-size:15.5px;font-weight:700;margin-bottom:7px">Wi-Fi a bordo</div>
@@ -668,29 +732,17 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
   <div data-v="mbar" data-active="false" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#061225;border-top:1px solid rgba(255,255,255,0.12);align-items:center;transition:transform 0.2s ease;transform:none">
     <!-- -->
     <!-- -->
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:none">
-          <!-- -->
-            <span style="white-space:nowrap;color:#F2B01E">1 Corsa</span>
-          <!-- -->
-            <span style="white-space:nowrap;color:#8FA8C6">2 Dati</span>
-          <!-- -->
-            <span style="white-space:nowrap;color:#8FA8C6">3 Richiesta</span>
-          <!-- -->
-        </div>
+      <div class="bar-price" style="flex:0 0 auto;min-width:0">
+        <span>totale</span>
         <div style="font-family:&#x27;Unbounded&#x27;,sans-serif;font-weight:800;font-size:19px;color:#F2B01E;line-height:1.2;margin-top:3px">—</div>
       </div>
-      <button type="button" style="min-height:50px;padding:0 16px;background:#F2B01E;color:#08182F;border:none;border-radius:12px;font-weight:800;font-size:14.5px;cursor:pointer;white-space:nowrap">Trova la corsa</button>
+      <button type="button" style="min-height:50px;padding:0 16px;background:#F2B01E;color:#08182F;border:none;border-radius:12px;font-weight:800;font-size:14.5px;cursor:pointer;white-space:nowrap">Invia la richiesta</button>
     <!-- -->
-    <a href="https://wa.me/393245958718?text=Buongiorno!%20Vorrei%20prenotare%20un%20biglietto" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:50px;height:50px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:#25D366;color:#062B14;border-radius:12px">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path></svg>
-    </a>
   </div>
 
   <!-- -->
 
   <!-- -->
 </div>
-
-</div><script id="app-props" type="application/json">{"defaultLang":"it","initialNow":"2026-10-06T22:24:11.357Z"}</script>
+</div><script id="app-props" type="application/json">{"defaultLang":"it","initialNow":"2026-10-06T23:37:32.248Z"}</script>
 <noscript><p class="no-js">Chiedi all’operatore informazioni su itinerario, bagagli o documenti. <a href="tel:+380674704617">+380 67 470 46 17</a> · <a href="https://wa.me/380674704617">WhatsApp</a></p></noscript></body></html>

@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import { parseFragment } from 'parse5';
 import { build } from 'esbuild';
+import { createHash } from 'node:crypto';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
@@ -120,6 +121,7 @@ await build({entryPoints:['src/entry.js'], bundle:true, minify:true, outfile:'di
       }));
     }
   }]});
+const clientVersion = createHash('sha256').update(await read('dist/assets/app.js')).digest('hex').slice(0,12);
 for (const locale of locales) {
   const t = T[locale.code];
   const title = Component.META[locale.code].title;
@@ -143,7 +145,7 @@ for (const locale of locales) {
 <meta property="og:image:width" content="1600"><meta property="og:image:height" content="900">
 <script type="application/ld+json">${json(schema)}</script>`;
   const html = `<!DOCTYPE html><html lang="${locale.lang}"><head><meta charset="utf-8">${baseHead}${seo}
-<style>${fontCss}${styles}</style><script defer src="/assets/vendor/react.production.min.js"></script><script defer src="/assets/vendor/react-dom.production.min.js"></script><script defer src="/assets/app.js"></script></head><body>
+<style>${fontCss}${styles}</style><script defer src="/assets/vendor/react.production.min.js"></script><script defer src="/assets/vendor/react-dom.production.min.js"></script><script defer src="/assets/app.js?v=${clientVersion}"></script></head><body>
 <div id="app">${markup}</div><script id="app-props" type="application/json">${json(props)}</script>
 <noscript><p class="no-js">${t.ui.helpSub} <a href="tel:+380674704617">+380 67 470 46 17</a> · <a href="https://wa.me/380674704617">WhatsApp</a></p></noscript></body></html>`;
   const directory = 'dist' + (locale.path === '/' ? '' : locale.path);

@@ -277,6 +277,7 @@ const INP_BAD = ';border-color:rgba(206,43,55,0.85);background:rgba(206,43,55,0.
 
 const WA_NUM = '380674704617';
 const VIBER_NUM = '%2B380674704617';
+const DRAFT_KEY = 'avtobus.booking-draft.v1';
 
 export class Component extends React.Component {
   seatReq = 0;
@@ -304,8 +305,10 @@ export class Component extends React.Component {
     extra: [],
     seats: [],
     seatMode: 'any',
+    seatPickerOpen: false,
     openFaq: 0,
     showErrors: false,
+    touched: {},
     consent: false,
     seatConflict: false,
     typing: false,
@@ -319,13 +322,34 @@ export class Component extends React.Component {
   };
 
   componentDidMount() {
-    const next = {};
+    const next = this.readDraft() || {};
     const l = this.detectLang();
     if (l && l !== this.state.lang) next.lang = l;
     next.seatsLoading = false;
     next.liveDates = true;
-    this.setState(next, () => { this.applyMeta(); this.loadSeats(); });
+    this.setState(next, () => {
+      this.applyMeta();
+      if (this.state.dateOut && !this.dateOptions().some(d => d.k === this.state.dateOut)) {
+        this.setState({dateOut:'', seats:[]}, () => this.loadSeats());
+      } else this.loadSeats();
+    });
     const isField = el => el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) && el.type !== 'checkbox';
+    // Finish the user's tap before blur feedback changes the next control's
+    // position. Keyboard/tab blur still shows feedback immediately.
+    this.pendingTouched = {};
+    this.onPointerDown = () => { this.pointerActive = true; };
+    this.onPointerEnd = () => {
+      this.pointerActive = false;
+      clearTimeout(this.touchTimer);
+      this.touchTimer = setTimeout(() => {
+        const touched = this.pendingTouched;
+        this.pendingTouched = {};
+        if (Object.keys(touched).length) this.setState(s => ({touched:{...s.touched, ...touched}}));
+      }, 0);
+    };
+    document.addEventListener('pointerdown', this.onPointerDown, true);
+    document.addEventListener('pointerup', this.onPointerEnd, true);
+    document.addEventListener('pointercancel', this.onPointerEnd, true);
     this.onFocusIn = e => { if (isField(e.target) && !this.state.typing) this.setState({ typing: true }); };
     this.onFocusOut = () => {
       setTimeout(() => { if (!isField(document.activeElement) && this.state.typing) this.setState({ typing: false }); }, 120);
@@ -360,6 +384,10 @@ export class Component extends React.Component {
     this.seatAbort?.abort();
     if (this.poll) clearInterval(this.poll);
     if (this.timer) clearTimeout(this.timer);
+    clearTimeout(this.touchTimer);
+    document.removeEventListener('pointerdown', this.onPointerDown, true);
+    document.removeEventListener('pointerup', this.onPointerEnd, true);
+    document.removeEventListener('pointercancel', this.onPointerEnd, true);
     if (this.onVisible) document.removeEventListener('visibilitychange', this.onVisible);
     if (this.onFocusIn) document.removeEventListener('focusin', this.onFocusIn);
     if (this.onFocusOut) document.removeEventListener('focusout', this.onFocusOut);
@@ -473,12 +501,14 @@ export class Component extends React.Component {
     }, 60);
   }
 
-  sig() {
-    const s = this.state;
+  sig(s = this.state) {
     return JSON.stringify([s.dir, s.from, s.to, s.dateOut, s.pax, s.seatMode, s.seats, s.lead, s.extra, s.extraKg, s.email, s.comment, s.consent]);
   }
 
   componentDidUpdate(_props, previous) {
+    if (!this.state.sentId && (previous.sentId || this.sig(previous) !== this.sig() || previous.touched !== this.state.touched || previous.showErrors !== this.state.showErrors)) {
+      this.persistDraft();
+    }
     if (this.state.modalOpen && !previous.modalOpen) {
       this.previousFocus = document.activeElement;
       this.savedOverflow = document.body.style.overflow;
@@ -514,8 +544,7 @@ export class Component extends React.Component {
   step() {
     const s = this.state;
     if (!s.from || !s.to || !s.dateOut) return 1;
-    if (this.passengers().some(p => !p.first.trim() || !p.last.trim() || !this.validPhone(p.phone)) || !s.consent) return 2;
-    return 3;
+    return this.validationErrors().length ? 2 : 3;
   }
 
   copy(text) {
@@ -542,7 +571,68 @@ export class Component extends React.Component {
   }
 
   failValidation() {
-    this.setState({ showErrors: true, toast: '' }, () => this.scrollToErr());
+    this.setState({ showErrors: true, toast: '' }, () => {
+      const first = this.validationErrors()[0];
+      const field = first && document.getElementById(first.id);
+      if (!field) return this.scrollToErr();
+      field.focus({preventScroll:true});
+      this.scrollToEl(field.closest('[data-field]') || field.closest('label') || field);
+    });
+  }
+
+  touch(id) {
+    return () => {
+      if (this.pointerActive) { this.pendingTouched[id] = true; return; }
+      this.setState(s => ({touched:{...s.touched, [id]:true}}));
+    };
+  }
+
+  visibleError(id, error) { return (this.state.showErrors || this.state.touched[id]) ? error : ''; }
+
+  persistDraft() {
+    const s = this.state;
+    try {
+      window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({version:1, updatedAt:Date.now(),
+        dir:s.dir, from:s.from, to:s.to, dateOut:s.dateOut, pax:s.pax, extraKg:s.extraKg,
+        lead:s.lead, extra:s.extra, email:s.email, comment:s.comment, seatMode:s.seatMode,
+        seats:s.seats, seatPickerOpen:s.seatPickerOpen, consent:s.consent, touched:s.touched, showErrors:s.showErrors}));
+    } catch { /* Storage can be unavailable; booking still works. */ }
+  }
+
+  readDraft() {
+    try {
+      const d = JSON.parse(window.sessionStorage.getItem(DRAFT_KEY));
+      if (!d || d.version !== 1 || !Number.isFinite(d.updatedAt) || Date.now() - d.updatedAt > 86400000 || d.updatedAt > Date.now() + 60000) {
+        this.clearDraft();
+        return null;
+      }
+      const string = (v, max = 200) => typeof v === 'string' ? v.slice(0, max) : '';
+      const person = p => ({first:string(p?.first), last:string(p?.last), phone:this.cleanPhone(string(p?.phone, 50))});
+      const dir = d.dir === 'it_ua' ? 'it_ua' : 'ua_it';
+      const fromCities = dir === 'ua_it' ? UA_CITIES : IT_CITIES;
+      const toCities = dir === 'ua_it' ? IT_CITIES : UA_CITIES;
+      const pax = Math.min(6, Math.max(1, parseInt(d.pax, 10) || 1));
+      const touched = Object.fromEntries(Object.entries(d.touched || {}).filter(([k,v]) => v === true && /^(passenger-[1-6]-(first|last|phone)|booking-email|booking-consent)$/.test(k)));
+      const seatMode = d.seatMode === 'manual' ? 'manual' : 'any';
+      return {dir, from:fromCities.some(c => c.k === d.from) ? d.from : '',
+        to:toCities.some(c => c.k === d.to) ? d.to : '',
+        dateOut:typeof d.dateOut === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d.dateOut) ? d.dateOut : '',
+        pax:String(pax), extraKg:Math.min(60, Math.max(0, Math.floor(Number(d.extraKg) || 0))),
+        lead:person(d.lead), extra:Array.from({length:pax-1}, (_,i) => person(d.extra?.[i])),
+        email:string(d.email, 254), comment:string(d.comment, 2000), seatMode,
+        seats:seatMode === 'manual' && Array.isArray(d.seats) ? [...new Set(d.seats.filter(n => Number.isInteger(n) && n >= 1 && n <= 50))].slice(0,pax) : [],
+        seatPickerOpen:d.seatPickerOpen === true, consent:d.consent === true, touched, showErrors:d.showErrors === true};
+    } catch { this.clearDraft(); return null; }
+  }
+
+  clearDraft() {
+    try { window.sessionStorage.removeItem(DRAFT_KEY); } catch { /* Storage unavailable. */ }
+  }
+
+  trustSchedule() {
+    const s = this.state, ui = this.t().ui;
+    const city = (s.dir === 'ua_it' ? UA_CITIES : IT_CITIES).find(c => c.k === s.from);
+    return city ? ui['weekly_' + city.dep[0]] : ui[s.dir === 'ua_it' ? 'weeklyUa' : 'weeklyIt'];
   }
 
   lang() { return this.state.lang; }
@@ -737,22 +827,44 @@ export class Component extends React.Component {
     return digits.length >= 9 && digits.length <= 15;
   }
 
-  missing() {
-    const t = this.t();
-    const s = this.state;
-    const out = [];
-    if (!s.from) out.push(t.f.from);
-    if (!s.to) out.push(t.f.to);
-    if (!s.dateOut) out.push(t.f.dateOut);
-    if (s.email.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s.email.trim())) out.push(t.f.email);
+  phoneError(phone) {
+    const ui = this.t().ui;
+    const value = this.normalizePhone(phone);
+    if (!value) return ui.phoneRequired;
+    if (this.validPhone(phone)) return '';
+    if (!/^\+?\d+$/.test(value)) return ui.phoneFormat;
+    if (value.startsWith('+380')) return value.length < 13 ? ui.phoneUaShort : ui.phoneUaLong;
+    if (!value.startsWith('+') && value.startsWith('0')) return value.length < 10 ? ui.phoneUaShort : ui.phoneUaLong;
+    if (value.startsWith('+39')) return value.length < 12 ? ui.phoneItShort : ui.phoneItLong;
+    const digits = value.replace(/^\+/, '');
+    if (digits.length < 9) return ui.phoneShort;
+    if (digits.length > 15) return ui.phoneLong;
+    return ui.phoneFormat;
+  }
+
+  emailError() {
+    const email = this.state.email.trim();
+    return email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? this.t().ui.emailError : '';
+  }
+
+  validationErrors() {
+    const t = this.t(), s = this.state, errors = [];
+    if (!s.from) errors.push({id:'booking-from', label:t.f.from});
+    if (!s.to) errors.push({id:'booking-to', label:t.f.to});
+    if (!s.dateOut) errors.push({id:'booking-date', label:t.f.dateOut});
     this.passengers().forEach((p, i) => {
       const who = ' (' + t.f.paxN + ' ' + (i + 1) + ')';
-      if (!p.first.trim()) out.push(t.f.first + who);
-      if (!p.last.trim()) out.push(t.f.last + who);
-      if (!this.validPhone(p.phone)) out.push(t.f.phone + who);
+      if (!p.first.trim()) errors.push({id:`passenger-${i+1}-first`, label:t.f.first + who});
+      if (!p.last.trim()) errors.push({id:`passenger-${i+1}-last`, label:t.f.last + who});
+      if (this.phoneError(p.phone)) errors.push({id:`passenger-${i+1}-phone`, label:t.f.phone + who});
     });
-    if (!s.consent) out.push(t.consentShort);
-    return out;
+    if (this.emailError()) errors.push({id:'booking-email', label:t.f.email});
+    if (!s.consent) errors.push({id:'booking-consent', label:t.consentShort});
+    return errors;
+  }
+
+  missing() {
+    return this.validationErrors().map(e => e.label);
   }
 
   routeNames() {
@@ -859,6 +971,7 @@ export class Component extends React.Component {
     this.setState({ showErrors: false, sending: true, sendError: false, seatConflict: false, sentId: '', dupId: '' });
 
     const finish = id => {
+      this.clearDraft();
       this.sentSig = this.sig();
       this.setState({ sending: false, sentId: id, modalOpen: true });
       this.loadSeats(true);
@@ -951,14 +1064,24 @@ export class Component extends React.Component {
       });
     });
 
-    const rows = this.passengers().map((p, i) => ({
+    const rows = this.passengers().map((p, i) => {
+      const firstId = `passenger-${i+1}-first`, lastId = `passenger-${i+1}-last`, phoneId = `passenger-${i+1}-phone`;
+      const firstError = this.visibleError(firstId, p.first.trim() ? '' : t.ui.firstRequired);
+      const lastError = this.visibleError(lastId, p.last.trim() ? '' : t.ui.lastRequired);
+      const phoneError = this.visibleError(phoneId, this.phoneError(p.phone));
+      return {
       title: t.f.paxN + ' ' + (i + 1),
       first: p.first, last: p.last, phone: p.phone,
-      firstInvalid: s.showErrors && !p.first.trim(), lastInvalid: s.showErrors && !p.last.trim(), phoneInvalid: s.showErrors && !this.validPhone(p.phone),
+      firstId, lastId, phoneId, firstError, lastError, phoneError,
+      firstErrorId:firstId+'-error', lastErrorId:lastId+'-error', phoneErrorId:phoneId+'-error',
+      firstDescription:firstError ? firstId+'-error' : undefined,
+      lastDescription:lastError ? lastId+'-error' : undefined,
+      phoneDescription:phoneError ? phoneId+'-error' : undefined,
+      firstInvalid:!!firstError, lastInvalid:!!lastError, phoneInvalid:!!phoneError,
       seat: s.seats[i] || t.ui.anySeat,
-      firstStyle: INP_LIGHT + ((s.showErrors && !p.first.trim()) ? INP_BAD : ''),
-      lastStyle: INP_LIGHT + ((s.showErrors && !p.last.trim()) ? INP_BAD : ''),
-      phoneStyle: INP_LIGHT + ((s.showErrors && !this.validPhone(p.phone)) ? INP_BAD : ''),
+      firstStyle: INP_LIGHT + (firstError ? INP_BAD : ''),
+      lastStyle: INP_LIGHT + (lastError ? INP_BAD : ''),
+      phoneStyle: INP_LIGHT + (phoneError ? INP_BAD : ''),
       wrapStyle: i === 0
         ? 'padding:0'
         : 'margin-top:16px;padding:16px 16px 18px;border:1px dashed rgba(255,255,255,0.16);border-radius:14px;background:rgba(255,255,255,0.03)',
@@ -967,8 +1090,9 @@ export class Component extends React.Component {
       acPhone: i === 0 ? 'tel' : 'off',
       onFirst: i === 0 ? this.setLead('first') : this.setExtra(i - 1, 'first'),
       onLast: i === 0 ? this.setLead('last') : this.setExtra(i - 1, 'last'),
-      onPhone: i === 0 ? this.setLead('phone') : this.setExtra(i - 1, 'phone')
-    }));
+      onPhone: i === 0 ? this.setLead('phone') : this.setExtra(i - 1, 'phone'),
+      onFirstBlur:this.touch(firstId), onLastBlur:this.touch(lastId), onPhoneBlur:this.touch(phoneId)
+    }; });
 
     const outLeg = this.legInfo(uaIt, s.from, s.to);
     const depPair = outLeg.dep;
@@ -1024,7 +1148,7 @@ export class Component extends React.Component {
       isUaIt: uaIt && !!s.from,
       hasFrom: !!s.from,
       hasTo: !!s.to,
-      trustRows: t.hero.chips,
+      trustRows: [this.trustSchedule(), ...t.hero.chips.slice(1)],
       isItUa: !uaIt && !!s.from,
       toFlagIt: uaIt && !!s.to,
       toFlagUa: !uaIt && !!s.to,
@@ -1085,12 +1209,20 @@ export class Component extends React.Component {
       sending: s.sending,
       seatCounter: s.seatMode === 'any' ? t.ui.optionalLabel : s.seats.length + ' / ' + this.paxCount(),
       anySeat: s.seatMode === 'any', manualSeat: s.seatMode === 'manual',
-      chooseAnySeat: () => this.setState({seatMode:'any',seats:[],seatConflict:false}, () => this.loadSeats()),
-      chooseManualSeat: () => this.setState({seatMode:'manual'}, () => this.loadSeats()),
+      seatPickerOpen:s.seatPickerOpen,
+      seatSelectionPreview:s.seats.length ? t.f.seat + ': ' + s.seats.join(', ') : t.ui.anySeat,
+      toggleSeatPicker:e => { e.preventDefault(); if (!s.sending) this.setState({seatPickerOpen:!s.seatPickerOpen}, () => this.persistDraft()); },
+      chooseAnySeat: () => this.setState({seatMode:'any',seats:[],seatConflict:false,seatPickerOpen:false}, () => this.loadSeats()),
+      chooseManualSeat: () => this.setState({seatMode:'manual',seatPickerOpen:true}, () => this.loadSeats()),
       seatsLoading: s.seatsLoading,
       seatsFailed: s.seatsError,
       retrySeats: () => this.loadSeats(),
       email: s.email,
+      emailError:this.visibleError('booking-email', this.emailError()),
+      emailInvalid:!!this.visibleError('booking-email', this.emailError()),
+      emailDescription:this.visibleError('booking-email', this.emailError()) ? 'booking-email-error' : undefined,
+      emailStyle:INP_LIGHT + (this.visibleError('booking-email', this.emailError()) ? INP_BAD : ''),
+      onEmailBlur:this.touch('booking-email'),
       comment: s.comment,
       onEmail: e => this.setState({ email: e.target.value }),
       onComment: e => this.setState({ comment: e.target.value }),
@@ -1137,29 +1269,17 @@ export class Component extends React.Component {
         return { label: (done ? '✓ ' : (i + 1) + ' ') + name, style: 'white-space:nowrap;color:' + (on ? '#F2B01E' : done ? '#8FA8C6' : '#8FA8C6') };
       }),
       barLabel: (() => {
-        const st = this.step();
-        if (st === 1) return t.bar.find;
-        if (st === 2) return t.ui.toDetails;
         return s.sending ? t.f.sending : t.f.submit;
       })(),
-      barAction: () => {
-        const st = this.step();
-        if (st === 1) {
-          const miss = [];
-          if (!s.from) miss.push(t.f.from);
-          if (!s.to) miss.push(t.f.to);
-          if (!s.dateOut) miss.push(t.f.dateOut);
-          this.flash(t.searchErr + miss.join(', '), 4200);
-          return this.scrollToId('v3search');
-        }
-        if (st === 2) return this.scrollToId('v3pax');
-        this.submit('site');
-      },
+      barAction: () => this.submit('site'),
       showErrors: s.showErrors && this.missing().length > 0,
       errorText: t.err + this.missing().join(', '),
       errRef: this.errRef,
       seatConflict: s.seatConflict,
       consent: s.consent,
+      consentError:this.visibleError('booking-consent', s.consent ? '' : t.ui.consentError),
+      consentInvalid:!!this.visibleError('booking-consent', s.consent ? '' : t.ui.consentError),
+      consentDescription:this.visibleError('booking-consent', s.consent ? '' : t.ui.consentError) ? 'booking-consent-error' : undefined,
       onConsent: e => this.setState({ consent: !!e.target.checked }),
       consentBox: 'flex:0 0 auto;width:22px;height:22px;margin:1px 0 0;accent-color:#F2B01E;cursor:pointer' ,
       consentWrap: 'display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 15px;border-radius:13px;cursor:pointer;border:1px solid ' +

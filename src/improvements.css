@@ -49,6 +49,70 @@ p a, li a { text-decoration:underline; text-underline-offset:3px; }
   [data-v="direction"] > span { display:none !important; }
   [data-v="cta"] { padding:18px 56px 18px 18px !important; }
   header a[hreflang] { min-width:32px !important; padding:6px 4px !important; }
-  [data-v="seat-card"] { padding:12px !important; }
   [data-v="hero-image"] + div { background:linear-gradient(180deg,rgba(6,18,37,.82),rgba(6,18,37,.35) 170px,#061225 300px) !important; }
+}
+
+/* Keep the mobile route and booking flow compact. */
+.trip-details { grid-column:1 / -1; border-top:1px solid rgba(255,255,255,.12); }
+.trip-details > summary { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px; padding:8px 0; font-size:14px; font-weight:700; cursor:pointer; }
+.trip-details[open] .faq-plus { transform:rotate(45deg); }
+.trip-times { display:grid !important; grid-template-columns:minmax(0,1fr) minmax(58px,.55fr) minmax(0,1fr); gap:12px !important; }
+.trip-times > div:last-child { text-align:right; }
+.trip-times > div:nth-child(2) { min-width:0 !important; }
+.trip-continue { display:flex; justify-content:flex-end; align-items:center; min-height:44px; font-size:15px; font-weight:700; }
+[data-v="split"] { display:flex !important; flex-direction:column; gap:16px !important; max-width:900px; margin:0 auto; }
+[data-v="split"] > * { width:100%; }
+.seat-picker { border:1px solid rgba(255,255,255,.16); border-radius:16px; background:rgba(255,255,255,.03); }
+.seat-picker > summary { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 18px; cursor:pointer; min-height:60px; }
+.seat-picker strong { display:block; font-size:15px; font-weight:700; line-height:1.45; }
+.seat-picker small { display:block; margin-top:3px; font-size:13px; color:#A9C0DA; line-height:1.4; }
+.seat-picker[open] > summary .faq-plus { transform:rotate(45deg); }
+.seat-picker-body { max-width:480px; margin:0 auto; padding:0 18px 18px; }
+.onboard-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.bar-price > span { display:block; font-size:12px; font-weight:600; color:#A9C0DA; }
+[data-v="mbar"] > button { flex:1; min-width:0; white-space:normal !important; line-height:1.3; }
+.field-error { margin:0; }
+#booking-consent-error { margin-top:8px; }
+#v3pax input:-webkit-autofill,
+#v3pax input:-webkit-autofill:hover,
+#v3pax input:-webkit-autofill:focus {
+  -webkit-text-fill-color:#F5F8FC;
+  caret-color:#F5F8FC;
+  -webkit-box-shadow:0 0 0 1000px #1C2B3E inset;
+  box-shadow:0 0 0 1000px #1C2B3E inset;
+}
+#v3pax input[aria-invalid="true"]:-webkit-autofill {
+  -webkit-box-shadow:0 0 0 1000px #30202A inset;
+  box-shadow:0 0 0 1000px #30202A inset;
+}
+@media(max-width:940px) {
+  .onboard-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  [data-v="mbar"] { padding:8px 16px calc(8px + env(safe-area-inset-bottom)) !important; gap:12px !important; }
+  [data-v="mbar"] > button { min-height:48px !important; padding:8px 12px !important; }
+}
+@media(max-width:580px) {
+  .seat-picker-body { padding:0 10px 14px; }
+  #v3results, #v3seats { padding-top:24px !important; }
+  #v3results h2 { font-size:21px !important; line-height:1.35; }
+  #v3results > div:first-child { margin-bottom:12px !important; }
+  #v3results > div:first-child > span { display:none; }
+  .date-strip { padding-bottom:12px !important; }
+  [data-v="tripcard"] { padding:16px !important; gap:12px !important; }
+  .trip-meta { margin-bottom:10px !important; }
+  .trip-times > div > div:first-child { font-size:clamp(18px,4.8vw,24px) !important; }
+  [data-v="tripprice"] { display:grid; grid-template-columns:1fr auto; align-items:center; gap:4px 12px; padding:10px 0 0 !important; }
+  [data-v="tripprice"] > div:nth-child(2) { font-size:26px !important; margin:0 !important; }
+  [data-v="tripprice"] > div:last-child { grid-column:1 / -1; }
+  .onboard-grid { grid-template-columns:minmax(0,1fr); }
+  [data-v="searchgrid"] { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  [data-v="searchgrid"] > label { grid-column:1 / -1; }
+  [data-v="searchgrid"] > .search-date, [data-v="searchgrid"] > .search-passengers { grid-column:auto; }
+  .search-date svg { display:none; }
+  .search-date select { padding-left:12px !important; padding-right:24px !important; background-position:right 10px center; }
+  .passenger-heading { flex-direction:column; gap:4px !important; }
+  .passenger-heading > span { font-size:13px !important; letter-spacing:normal !important; }
+  #v3pax label > span:first-child { font-size:14px !important; }
+}
+@media(max-width:360px) {
+  [data-v="searchgrid"] > .search-date, [data-v="searchgrid"] > .search-passengers { grid-column:1 / -1; }
 }

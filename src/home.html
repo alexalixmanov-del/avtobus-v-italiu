@@ -98,7 +98,7 @@
                     <span style="flex:1;background:#008C45"></span><span style="flex:1;background:#F4F5F0"></span><span style="flex:1;background:#CD212A"></span>
                   </span>
                 </sc-if>
-                <select disabled="{{ sending }}" value="{{ form.from }}" onChange="{{ onFrom }}" style="{{ fromInp }}">
+                <select id="booking-from" disabled="{{ sending }}" value="{{ form.from }}" onChange="{{ onFrom }}" style="{{ fromInp }}">
                   <sc-for list="{{ fromOptions }}" as="c" hint-placeholder-count="4">
                     <option value="{{ c.k }}">{{ c.name }}</option>
                   </sc-for>
@@ -119,7 +119,7 @@
                     <span style="flex:1;background:#005BBB"></span><span style="flex:1;background:#FFD500"></span>
                   </span>
                 </sc-if>
-                <select disabled="{{ sending }}" value="{{ form.to }}" onChange="{{ onTo }}" style="{{ toInp }}">
+                <select id="booking-to" disabled="{{ sending }}" value="{{ form.to }}" onChange="{{ onTo }}" style="{{ toInp }}">
                   <sc-for list="{{ toOptions }}" as="c" hint-placeholder-count="4">
                     <option value="{{ c.k }}">{{ c.name }}</option>
                   </sc-for>
@@ -127,11 +127,11 @@
               </span>
             </label>
 
-            <label style="display:flex;flex-direction:column;gap:10px">
+            <label class="search-date" style="display:flex;flex-direction:column;gap:10px">
               <span style="{{ lbl }}">{{ t.f.dateOut }}</span>
               <span style="position:relative;display:block">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
-                <select disabled="{{ sending }}" value="{{ form.dateOut }}" onChange="{{ onDateOut }}" style="{{ dateInp }}">
+                <select id="booking-date" disabled="{{ sending }}" value="{{ form.dateOut }}" onChange="{{ onDateOut }}" style="{{ dateInp }}">
                   <sc-for list="{{ dateOutOptions }}" as="d" hint-placeholder-count="4">
                     <option value="{{ d.k }}">{{ d.name }}</option>
                   </sc-for>
@@ -139,7 +139,7 @@
               </span>
             </label>
 
-            <label style="display:flex;flex-direction:column;gap:10px">
+            <label class="search-passengers" style="display:flex;flex-direction:column;gap:10px">
               <span style="{{ lbl }}">{{ t.f.pax }}</span>
               <span style="position:relative;display:block">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8FA8C6" stroke-width="1.7" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21c1.4-4 4-6 7.5-6s6.1 2 7.5 6"></path></svg>
@@ -201,12 +201,12 @@
     <div style="display:grid;gap:12px">
       <sc-for list="{{ legs }}" as="l" hint-placeholder-count="1">
         <div data-v="tripcard" style="display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;background:transparent;border:1px solid rgba(255,255,255,0.1);background-color:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(20px,3vw,30px);animation:v3rise 0.45s ease both">
-          <div>
-            <div style="display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:16px">
+          <div class="trip-main">
+            <div class="trip-meta" style="display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:16px">
               <span style="{{ l.tagStyle }}">{{ l.tag }}</span>
               <span style="font-size:13px;font-weight:700;color:#8FA8C6">{{ l.dateLabel }}</span>
             </div>
-            <div style="display:flex;align-items:center;gap:clamp(12px,2vw,26px);flex-wrap:wrap">
+            <div class="trip-times" style="display:flex;align-items:center;gap:clamp(12px,2vw,26px);flex-wrap:wrap">
               <div>
                 <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em">{{ l.depTime }}</div>
                 <div style="font-size:14px;font-weight:600;color:#8FA8C6;margin-top:4px">{{ l.fromName }}</div>
@@ -220,30 +220,26 @@
                 <div style="font-size:14px;font-weight:600;color:#8FA8C6;margin-top:4px">{{ l.toName }}</div>
               </div>
             </div>
-            <dl class="route-addresses"><dt>{{ t.ui.boarding }}</dt><dd>{{ fromAddress }}</dd><dt>{{ t.ui.dropoff }}</dt><dd>{{ toAddress }}</dd></dl>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px">
-              <sc-for list="{{ l.tags }}" as="g" hint-placeholder-count="4">
-                <span style="padding:7px 12px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:12.5px;font-weight:600;color:#B9CBE1">{{ g }}</span>
-              </sc-for>
-            </div>
           </div>
           <div data-v="tripprice" style="text-align:right;border-left:1px solid rgba(255,255,255,0.1);padding-left:clamp(20px,3vw,30px)">
             <div style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ l.priceLabel }}</div>
             <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,36px);color:#F2B01E;line-height:1.1;margin:6px 0 4px">{{ l.price }} &#8364;</div>
             <div style="font-size:13px;font-weight:600;color:#8FA8C6">{{ l.perPerson }}</div>
           </div>
+          <details class="trip-details">
+            <summary>{{ t.ui.tripDetails }} <span class="faq-plus" aria-hidden="true">+</span></summary>
+            <dl class="route-addresses"><dt>{{ t.ui.boarding }}</dt><dd>{{ fromAddress }}</dd><dt>{{ t.ui.dropoff }}</dt><dd>{{ toAddress }}</dd></dl>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              <sc-for list="{{ l.tags }}" as="g" hint-placeholder-count="4">
+                <span style="padding:7px 12px;background:rgba(255,255,255,0.06);border-radius:8px;font-size:12.5px;font-weight:600;color:#B9CBE1">{{ g }}</span>
+              </sc-for>
+            </div>
+          </details>
         </div>
       </sc-for>
     </div>
 
-    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px">
-      <div style="flex:1;min-width:min(100%,200px)">
-        <div style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ trip.priceLabel }}</div>
-        <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,34px);line-height:1.2">{{ trip.total }} &#8364;</div>
-        <div style="font-size:13px;font-weight:600;color:#6F8AA8;margin-top:4px">{{ trip.freeLine }}</div>
-      </div>
-      <a data-v="cta" href="#v3seats" style="padding:17px 30px;background:#F2B01E;color:#08182F;border-radius:13px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;transition:background 0.15s ease">{{ t.res.pick }}</a>
-    </div>
+    <a class="trip-continue" href="#v3pax">{{ t.ui.toPassengers }} →</a>
     </sc-if>
   </section>
 
@@ -251,7 +247,9 @@
   <section id="v3seats" style="scroll-margin-top:86px;max-width:1320px;margin:0 auto;padding:clamp(38px,5vw,64px) clamp(16px,4vw,32px) 0">
     <div data-v="split" style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(20px,3vw,34px);align-items:start">
 
-      <div data-v="seat-card" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(18px,2.6vw,26px)">
+      <details data-v="seat-card" class="seat-picker" open="{{ seatPickerOpen }}">
+        <summary onClick="{{ toggleSeatPicker }}"><span><strong>{{ t.ui.seatPickerTitle }}</strong><small>{{ seatSelectionPreview }}</small></span><span class="faq-plus" aria-hidden="true">+</span></summary>
+        <div class="seat-picker-body">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px">
           <span style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px">{{ t.seat.title }}</span>
           <span style="font-size:13px;font-weight:700;color:#F2B01E">{{ seatCounter }}</span>
@@ -298,39 +296,43 @@
         </div>
         <div class="cabin-rear">{{ t.ui.rear }}</div>
         </sc-if>
-      </div>
+        </div>
+      </details>
 
       <div>
         <div id="v3pax" style="scroll-margin-top:86px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:20px;padding:clamp(18px,2.6vw,28px)">
           <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;margin-bottom:18px">{{ t.pax.title }}</div>
           <sc-for list="{{ paxRows }}" as="p" hint-placeholder-count="1">
             <div style="{{ p.wrapStyle }}">
-              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px">
+              <div class="passenger-heading" style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px">
                 <span style="font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:none;color:#6F8AA8">{{ p.title }}</span>
                 <span style="font-size:12.5px;font-weight:700;color:#F5F8FC">{{ t.f.seat }} {{ p.seat }}</span>
               </div>
               <div data-v="paxgrid" style="display:grid;gap:12px">
-                <label style="display:flex;flex-direction:column;gap:7px">
+                <label data-field="{{ p.firstId }}" style="display:flex;flex-direction:column;gap:7px">
                   <span style="{{ lblLight }}">{{ t.f.first }}</span>
-                  <input disabled="{{ sending }}" type="text" aria-invalid="{{ p.firstInvalid }}" value="{{ p.first }}" onChange="{{ p.onFirst }}" autocomplete="{{ p.acFirst }}" placeholder="{{ t.ph.first }}" style="{{ p.firstStyle }}" />
+                  <input id="{{ p.firstId }}" disabled="{{ sending }}" type="text" aria-required="true" aria-invalid="{{ p.firstInvalid }}" aria-describedby="{{ p.firstDescription }}" value="{{ p.first }}" onChange="{{ p.onFirst }}" onBlur="{{ p.onFirstBlur }}" autocomplete="{{ p.acFirst }}" placeholder="{{ t.ph.first }}" style="{{ p.firstStyle }}" />
+                  <sc-if value="{{ p.firstError }}"><span id="{{ p.firstErrorId }}" class="field-error" aria-live="polite">{{ p.firstError }}</span></sc-if>
                 </label>
-                <label style="display:flex;flex-direction:column;gap:7px">
+                <label data-field="{{ p.lastId }}" style="display:flex;flex-direction:column;gap:7px">
                   <span style="{{ lblLight }}">{{ t.f.last }}</span>
-                  <input disabled="{{ sending }}" type="text" aria-invalid="{{ p.lastInvalid }}" value="{{ p.last }}" onChange="{{ p.onLast }}" autocomplete="{{ p.acLast }}" placeholder="{{ t.ph.last }}" style="{{ p.lastStyle }}" />
+                  <input id="{{ p.lastId }}" disabled="{{ sending }}" type="text" aria-required="true" aria-invalid="{{ p.lastInvalid }}" aria-describedby="{{ p.lastDescription }}" value="{{ p.last }}" onChange="{{ p.onLast }}" onBlur="{{ p.onLastBlur }}" autocomplete="{{ p.acLast }}" placeholder="{{ t.ph.last }}" style="{{ p.lastStyle }}" />
+                  <sc-if value="{{ p.lastError }}"><span id="{{ p.lastErrorId }}" class="field-error" aria-live="polite">{{ p.lastError }}</span></sc-if>
                 </label>
-                <label style="display:flex;flex-direction:column;gap:7px">
+                <label data-field="{{ p.phoneId }}" style="display:flex;flex-direction:column;gap:7px">
                   <span style="{{ lblLight }}">{{ t.f.phone }}</span>
-                  <input disabled="{{ sending }}" type="tel" aria-invalid="{{ p.phoneInvalid }}" value="{{ p.phone }}" onChange="{{ p.onPhone }}" autocomplete="{{ p.acPhone }}" inputmode="tel" placeholder="+380 __ ___ __ __" style="{{ p.phoneStyle }}" />
-                  <sc-if value="{{ p.phoneInvalid }}"><span class="field-error">{{ t.ui.phoneError }}</span></sc-if>
+                  <input id="{{ p.phoneId }}" disabled="{{ sending }}" type="tel" aria-required="true" aria-invalid="{{ p.phoneInvalid }}" aria-describedby="{{ p.phoneDescription }}" value="{{ p.phone }}" onChange="{{ p.onPhone }}" onBlur="{{ p.onPhoneBlur }}" autocomplete="{{ p.acPhone }}" inputmode="tel" placeholder="+380 __ ___ __ __" style="{{ p.phoneStyle }}" />
+                  <sc-if value="{{ p.phoneError }}"><span id="{{ p.phoneErrorId }}" class="field-error" aria-live="polite">{{ p.phoneError }}</span></sc-if>
                 </label>
               </div>
             </div>
           </sc-for>
 
           <div style="margin-top:18px">
-            <label style="display:flex;flex-direction:column;gap:7px;max-width:520px">
-              <span style="{{ lblLight }}">{{ t.f.email }}</span>
-              <input disabled="{{ sending }}" type="email" value="{{ email }}" onChange="{{ onEmail }}" autocomplete="email" inputmode="email" placeholder="{{ t.ph2.email }}" style="{{ inpLight }}" />
+            <label data-field="booking-email" style="display:flex;flex-direction:column;gap:7px;max-width:520px">
+              <span style="{{ lblLight }}">{{ t.ui.emailLabel }}</span>
+              <input id="booking-email" disabled="{{ sending }}" type="email" aria-invalid="{{ emailInvalid }}" aria-describedby="{{ emailDescription }}" value="{{ email }}" onChange="{{ onEmail }}" onBlur="{{ onEmailBlur }}" autocomplete="email" inputmode="email" placeholder="{{ t.ph2.email }}" style="{{ emailStyle }}" />
+              <sc-if value="{{ emailError }}"><span id="booking-email-error" class="field-error" aria-live="polite">{{ emailError }}</span></sc-if>
               <span style="font-size:13px;font-weight:600;color:#A9C0DA;line-height:1.45">{{ t.f.emailNote }}</span>
             </label>
           </div>
@@ -370,10 +372,13 @@
           </div>
           </details>
 
+          <div data-field="booking-consent">
           <label style="{{ consentWrap }}">
-            <input disabled="{{ sending }}" type="checkbox" checked="{{ consent }}" onChange="{{ onConsent }}" style="{{ consentBox }}" />
+            <input id="booking-consent" disabled="{{ sending }}" type="checkbox" aria-required="true" aria-invalid="{{ consentInvalid }}" aria-describedby="{{ consentDescription }}" checked="{{ consent }}" onChange="{{ onConsent }}" style="{{ consentBox }}" />
             <span style="font-size:13.5px;font-weight:600;line-height:1.55;color:#B9CBE1">{{ t.consentA }}<a href="/oferta.html" target="_blank" rel="noopener">{{ t.consentOferta }}</a>{{ t.consentB }}<a href="/privacy.html" target="_blank" rel="noopener">{{ t.consentPrivacy }}</a></span>
           </label>
+          <sc-if value="{{ consentError }}"><p id="booking-consent-error" class="field-error" aria-live="polite">{{ consentError }}</p></sc-if>
+          </div>
 
           <div ref="{{ errRef }}">
             <sc-if value="{{ showErrors }}" hint-placeholder-val="{{ false }}">
@@ -482,7 +487,7 @@
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
       <h2 style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.03em;margin:0">{{ t.stops.title }}</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+    <div class="onboard-grid" style="display:grid;gap:14px">
       <sc-for list="{{ t.onboard }}" as="i" hint-placeholder-count="4">
         <div style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);border-radius:16px;padding:20px">
           <div style="font-family:'Unbounded',sans-serif;font-size:15.5px;font-weight:700;margin-bottom:7px">{{ i.t }}</div>
@@ -552,19 +557,12 @@
       <div style="flex:1;min-width:0;font-size:14.5px;font-weight:800;line-height:1.35;color:#4ED88A">{{ barSentText }}</div>
     </sc-if>
     <sc-if value="{{ barOpen }}" hint-placeholder-val="{{ true }}">
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:none">
-          <sc-for list="{{ barSteps }}" as="b" hint-placeholder-count="3">
-            <span style="{{ b.style }}">{{ b.label }}</span>
-          </sc-for>
-        </div>
+      <div class="bar-price" style="flex:0 0 auto;min-width:0">
+        <span>{{ t.priceLabel }}</span>
         <div style="font-family:'Unbounded',sans-serif;font-weight:800;font-size:19px;color:#F2B01E;line-height:1.2;margin-top:3px">{{ totalText }}</div>
       </div>
       <button type="button" onClick="{{ barAction }}" disabled="{{ submitDisabled }}" style="min-height:50px;padding:0 16px;background:#F2B01E;color:#08182F;border:none;border-radius:12px;font-weight:800;font-size:14.5px;cursor:pointer;white-space:nowrap">{{ barLabel }}</button>
     </sc-if>
-    <a href="{{ waChatHref }}" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:50px;height:50px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:#25D366;color:#062B14;border-radius:12px">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path></svg>
-    </a>
   </div>
 
   <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
@@ -613,4 +611,3 @@
     <div role="status" aria-live="polite" style="position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:99;width:calc(100% - 32px);max-width:520px;background:#F5F8FC;color:#061225;padding:15px 22px;border-radius:14px;font-size:14px;font-weight:700;text-align:center;box-shadow:0 20px 44px rgba(0,0,0,0.45)">{{ toast }}</div>
   </sc-if>
 </div>
-
